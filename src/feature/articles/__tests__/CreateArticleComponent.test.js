@@ -5,8 +5,6 @@ import '@ckeditor/ckeditor5-react';
 import '@ckeditor/ckeditor5-build-classic';
 import { CreateArticle } from '../createArticle/CreateArticleComponent';
 
-jest.mock('@ckeditor/ckeditor5-react');
-jest.mock('@ckeditor/ckeditor5-build-classic');
 const renderCreateArtilce = args => {
   const initialProps = {
     article: {},

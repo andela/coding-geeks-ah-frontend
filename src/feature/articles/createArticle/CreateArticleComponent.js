@@ -25,24 +25,23 @@ export class CreateArticle extends Component {
   };
 
   handleSubmit = event => {
-    const {
-      title, description, tags, category, body
-    } = this.state;
+    const { title, description, tags, category, body } = this.state;
     const { createArticle } = this.props;
     event.preventDefault();
-    createArticle({
-      title,
-      description,
-      tags,
-      category,
-      body,
-    }, this.props);
+    createArticle(
+      {
+        title,
+        description,
+        tags,
+        category,
+        body
+      },
+      this.props
+    );
   };
 
   render() {
-    const {
-      title, description, tags, category, body
-    } = this.state;
+    const { title, description, tags, category, body } = this.state;
     return (
       <div className="mainDiv">
         <div className="input input--form">

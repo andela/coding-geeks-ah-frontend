@@ -15,6 +15,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^12.4.0",
     "@ckeditor/ckeditor5-editor-classic": "^12.1.4",
+    "@ckeditor/ckeditor5-build-inline": "^12.4.0",
     "@ckeditor/ckeditor5-react": "^1.1.3",
     "axios": "^0.19.0",
     "ckeditor-cloudinary-uploader-adapter": "^1.1.3",
@@ -26,6 +27,7 @@
     "jest-localstorage-mock": "^2.4.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "querystring": "^0.2.0",
     "lodash": "^4.17.15",

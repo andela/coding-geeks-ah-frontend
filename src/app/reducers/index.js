@@ -6,7 +6,7 @@ import forgotPasswordReducer from '../../feature/Reset Password/forgot password/
 import resetPasswordReducer from '../../feature/Reset Password/reset password/resetPasswordReducer';
 import article from '../../feature/articles/createArticle/createArticleReducer';
 import getAllArticles from '../../feature/articles/getArticles/GetAllArticleReducer';
-
+import getSingleArticle from '../../feature/articles/getSingleArticle/GetSingleArticleReducer';
 
 export default combineReducers({
   login: loginReducer,
@@ -15,5 +15,6 @@ export default combineReducers({
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
   crateArticle: article,
-  getAllArticles
+  getAllArticles,
+  getSingleArticle
 });

@@ -42,6 +42,23 @@ describe('Create Article success', () => {
       expect(dispatchedTypes).toEqual(expectedAction);
     });
   });
+
+  test('login testing error', () => {
+    const expected = {
+      status: 400,
+      error: 'SERVER ERROR!  Please contact the administartor'
+    };
+    moxios.stubRequest(/.*/, {
+      response: expected
+    });
+    const mockArticles = {
+      description: 'I knew that would happen soon but i kept it inside',
+      body: 'I knew that would happen soon but i kept it inside'
+    };
+    return store.dispatch(createArticle(mockArticles)).then(() => {
+      expect(store.getActions().length).toEqual(1);
+    });
+  });
 });
 
 describe('Create article fail', () => {
@@ -84,9 +101,19 @@ describe('Create article fail', () => {
       request.respondWith({
         status: 400,
         response: {
-          error: 'SERVER ERROR!  Please contact the administartor'
+          error: 'SERVER ERROR!  Please contact the administartor',
+          data: {
+            error: 'title is requiredB'
+          }
         }
       });
+    });
+    const expected = {
+      status: 400,
+      error: 'SERVER ERROR!  Please contact the administartor'
+    };
+    moxios.stubRequest('/.*', {
+      response: expected
     });
     const mockArticles = {
       title: 'So I the last one standing',

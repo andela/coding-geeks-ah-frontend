@@ -3,7 +3,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { GetAllArticles } from '../GetAllArticlesComponent';
 import dummyData from '../../../../__mocks__/mockData';
+<<<<<<< HEAD
 import defautImage from '../../../../app/common/images/defaultImage.png';
+=======
+>>>>>>> Feature(Create and Get all Articles): Enable user to create and view articles [Starts: #167484551]
 
 const renderGetArtilces = args => {
   const initialProps = {
@@ -22,6 +25,7 @@ describe('Get All Articles Components tests', () => {
     expect(wrapper.find('div').length).toBe(13);
   });
 });
+<<<<<<< HEAD
 describe('Testing Images', () => {
   const initialProps = {
     articles: [dummyData.returnedArticleWithImage],
@@ -56,3 +60,5 @@ describe('Return article with default image', () => {
     );
   });
 });
+=======
+>>>>>>> Feature(Create and Get all Articles): Enable user to create and view articles [Starts: #167484551]
