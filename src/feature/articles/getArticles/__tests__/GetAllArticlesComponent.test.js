@@ -16,13 +16,17 @@ const renderGetArtilces = args => {
   const props = { ...initialProps, ...args };
   return shallow(<GetAllArticles {...props} />);
 };
-
+const wrapper = renderGetArtilces();
 describe('Get All Articles Components tests', () => {
+  describe('Test Get All article component', () => {
+    it('Should render FollowUnfollow component', () => {
+      expect(wrapper).toHaveLength(1);
+    });
+  });
   it('Should render a form inputs', () => {
-    const wrapper = renderGetArtilces();
     wrapper.setState({ loading: false });
     expect(wrapper.find('.mainDiv').length).toBe(1);
-    expect(wrapper.find('div').length).toBe(13);
+    expect(wrapper.find('div').length).toBe(16);
     expect(wrapper.find('.link').length).toBe(1);
   });
 });

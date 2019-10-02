@@ -1,7 +1,10 @@
 import moxios from 'moxios';
 import appMockStore from '../../../../__mocks__/mockStoreConfig';
-import getAllArticles from '../GetAllArticlesAction';
-import { GET_ARTICLES_SUCCESS, GET_ARTICLES_FAIL } from '../../constants';
+import getSingleArticle from '../GetSingleArticleAction';
+import {
+  GET_SINGLE_ARTICLE_SUCCESS,
+  GET_SINGLE_ARTICLE_FAIL
+} from '../../constants';
 
 const store = appMockStore({});
 
@@ -14,22 +17,22 @@ describe('Create Article success', () => {
     store.clearActions();
   });
 
-  test('Should return GET_ARTICLES_SUCCESS action', async () => {
+  test('Should return GET_SINGLE_ARTICLE_SUCCESS action', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200
       });
     });
-    const expectedAction = GET_ARTICLES_SUCCESS;
-    await store.dispatch(getAllArticles()).then(() => {
+    const expectedAction = [GET_SINGLE_ARTICLE_SUCCESS];
+    return store.dispatch(getSingleArticle()).then(() => {
       const dispatchedActions = store.getActions();
 
       const dispatchedTypes = dispatchedActions.map(action => action.type);
-      expect(dispatchedTypes[1]).toEqual(expectedAction);
+      expect(dispatchedTypes).toEqual(expectedAction);
     });
   });
-  test('Should return GET_ARTICLES_FAIL action', async () => {
+  test('Should return GET_SINGLE_ARTICLE_FAIL action', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -39,11 +42,12 @@ describe('Create Article success', () => {
         }
       });
     });
-    const expectedAction = GET_ARTICLES_FAIL;
-    await store.dispatch(getAllArticles()).then(() => {
+    const expectedAction = [GET_SINGLE_ARTICLE_FAIL];
+    return store.dispatch(getSingleArticle()).then(() => {
       const dispatchedActions = store.getActions();
+
       const dispatchedTypes = dispatchedActions.map(action => action.type);
-      expect(dispatchedTypes[1]).toEqual(expectedAction);
+      expect(dispatchedTypes).toEqual(expectedAction);
     });
   });
 });

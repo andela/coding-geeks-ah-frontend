@@ -15,12 +15,10 @@ export class StarRating extends Component {
     };
   }
 
-  componentDidUpdate = () => {
-    this.submitRating();
-  };
-
   changeRating = (nextValue) => {
-    this.setState({ rating: nextValue });
+    this.setState({ rating: nextValue }, () => {
+      this.submitRating();
+    });
   }
 
   submitRating = () => {

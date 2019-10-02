@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 import GetAllArticles from '../feature/articles/getArticles/GetAllArticlesComponent';
+import GetSingleArticle from '../feature/articles/getSingleArticle/GetSingleArticleComponent';
 import CreateArticle from '../feature/articles/createArticle/CreateArticleComponent';
 import ProtectedRoutes from '../feature/protectedRoutes/ProtectedRoutesComponent';
 import SignUp from '../feature/auth/signup/SignUpComponent';
@@ -13,14 +14,15 @@ import Profile from '../feature/profile/view_profile/ViewProfileComponent';
 import UpdateProfile from '../feature/profile/update_profile/UpdateProfileComponent';
 import ForgotPassword from '../feature/Reset Password/forgot password/ForgotPasswordComponent';
 import ResetPassword from '../feature/Reset Password/reset password/ResetPasswordComponent';
-import SingleArticle from '../feature/article/getSingleArticle/ReadSingleArticleComponent';
+import Home from '../feature/homePage/Home';
+// import SingleArticle from '../feature/article/getSingleArticle/ReadSingleArticleComponent';
 
 toast.configure();
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {/* <Nav /> */}
+        <Home />
         <ToastContainer />
         <Switch>
           <Route path="/forgot" component={ForgotPassword} />
@@ -29,13 +31,14 @@ function App() {
             component={ResetPassword}
           />
           <Route exact path="/" component={GetAllArticles} />
+          <ProtectedRoutes path="/Create" component={CreateArticle} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
           <Route path="/profile" component={Profile} />
           <Route path="/update-profile" component={UpdateProfile} />
           <Route path="/Signup" component={SignUp} />
-          <Route path="/articles/:slug" component={SingleArticle} />
-          <ProtectedRoutes path="/Create" component={CreateArticle} />
+          {/* // <Route path="/articles/:slug" component={SingleArticle} /> */}
+          <Route path="/articles/:slug" component={GetSingleArticle} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -56,13 +56,11 @@
     flex-wrap: wrap;
 
     &__image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 30%;
     }
-
-    &__image-box {
-      width: 60%;
-    }
-
     &__content {
       width: 70%;
     }
@@ -91,6 +89,21 @@
           font-weight: bold;
           font-size: 18px;
         }
+        .article-time {
+          display: inline-flex;
+
+          color: black;
+          margin: 35px 0 0 50px;
+          position: absolute;
+          font-size: 13px;
+
+          .article__readTime {
+            margin-left: 10px;
+          }
+          .article__timePublished {
+            margin-left: 10px;
+          }
+        }
       }
       .article--wrapper {
         display: flex;
@@ -104,6 +117,14 @@
           font-size: 22px;
           font-weight: bold;
         }
+      }
+      hr {
+        margin-top: 2em;
+        width: 95%;
+        border: 0.5px solid #000000;
+      }
+      .likeDislike-box {
+        height: 40px;
       }
     }
   }
@@ -140,7 +161,7 @@
     }
   }
   .main-content {
-    margin-top: 20em;
+    margin-top: 16em;
     .article {
       margin-bottom: 20px;
       &__image {
@@ -163,7 +184,37 @@
     margin: 80% 0 0 30% !important;
   }
 }
+@media (min-width: 481px) and (max-width: 767px) {
+  .main--banner {
+    margin: -3em 0 10em 0;
 
+    &__img {
+      height: 40vh;
+    }
+  }
+  .main-content {
+    margin-top: 20em;
+    .article {
+      &__image-box {
+        width: 90%;
+      }
+      &-main--wrapper {
+        width: 80vw;
+        margin: 0 0 10px -2em;
+      }
+    }
+  }
+
+  .article__error {
+    margin-left: 1em;
+    font-size: 20px;
+  }
+  .loader {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 80% 0 0 30% !important;
+  }
+}
 @media (min-width: 768px) and (max-width: 1024px) {
   .main--banner {
     margin: -3em 0 10em 0;
@@ -173,7 +224,7 @@
     }
   }
   .main-content {
-    margin-top: 32em;
+    margin-top: 20em;
     .article {
       &__image-box {
         width: 90%;
@@ -201,7 +252,7 @@
     }
   }
   .main-content {
-    margin-top: 26em;
+    margin-top: 22em;
     .article {
       &__image-box {
         width: 80%;
