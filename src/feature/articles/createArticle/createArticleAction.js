@@ -11,7 +11,6 @@ const createArticle = (
   props
 ) => async dispatch => {
   const token = localStorage.getItem('token');
-
   const axiosConfig = {
     headers: {
       'Content-Type': 'application/json',

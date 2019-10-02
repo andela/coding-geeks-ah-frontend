@@ -7,35 +7,19 @@ import getImage from '../../../app/helpers/getImage';
 import defautImage from '../../../app/common/images/defaultImage.png';
 import avatar from '../../../app/common/images/avatar.png';
 import getAllArticles from './GetAllArticlesAction';
-import Home from '../../homePage/Home';
+import LikeDilsikeArticle from '../likeDislikeArticles/LikeDislikeComponent';
 import './GetAllArticles.scss';
 
 export class GetAllArticles extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: false
-    };
-  }
-
   componentDidMount() {
-    this.setState({
-      loading: true
-    });
     this.props.getAllArticles();
-    setTimeout(() => {
-      this.setState({
-        loading: false
-      });
-    }, 2000);
   }
 
   render() {
-    const { loading } = this.state;
-    const { articles } = this.props;
+    const { articles, loading } = this.props;
     return (
       <>
-        <Home />
+        {/* <Home /> */}
         <div className="mainDiv">
           <div className="main--banner">
             <div className="main--banner__text">
@@ -56,7 +40,11 @@ export class GetAllArticles extends Component {
             <div className="main-content">
               {articles.length !== 0 ? (
                 articles.map(article => (
-                  <Link to="#!" key={article.slug} className="link">
+                  <Link
+                    to={`/articles/${article.slug}`}
+                    key={article.slug}
+                    className="link"
+                  >
                     <div className="article article-main--wrapper">
                       <div className="article__image">
                         <img
@@ -94,6 +82,11 @@ export class GetAllArticles extends Component {
                             {article.description}
                           </div>
                         </div>
+                        <hr className="divider" />
+                        <LikeDilsikeArticle
+                          likes={article.likes}
+                          dislikes={article.dislikes}
+                        />
                       </div>
                     </div>
                   </Link>
@@ -117,7 +110,8 @@ export class GetAllArticles extends Component {
 }
 
 const mapStateToProps = state => ({
-  articles: state.getAllArticles.articles
+  articles: state.getAllArticles.articles,
+  loading: state.getAllArticles.loading
 });
 
 export default connect(
