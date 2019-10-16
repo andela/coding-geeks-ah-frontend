@@ -13,6 +13,7 @@ import Login from '../feature/auth/login/LoginComponent';
 import ForgotPassword from '../feature/Reset Password/forgot password/ForgotPasswordComponent';
 import ResetPassword from '../feature/Reset Password/reset password/ResetPasswordComponent';
 import SingleArticle from '../feature/article/getSingleArticle/ReadSingleArticleComponent';
+import FollowComponent from '../feature/followUnfollow/FollowUnfollow';
 
 toast.configure();
 function App() {
@@ -34,6 +35,8 @@ function App() {
           <Route path="/Signup" component={SignUp} />
           <Route path="/articles/:slug" component={SingleArticle} />
           <ProtectedRoutes path="/Create" component={CreateArticle} />
+          <Route path="/profiles/:userName/follow" component={FollowComponent} />
+          <Route path="/profiles/:userName/unfollow" component={FollowComponent} />
         </Switch>
       </BrowserRouter>
     </div>
