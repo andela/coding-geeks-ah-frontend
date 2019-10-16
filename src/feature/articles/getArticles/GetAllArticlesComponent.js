@@ -7,6 +7,7 @@ import getImage from '../../../app/helpers/getImage';
 import defautImage from '../../../app/common/images/defaultImage.png';
 import avatar from '../../../app/common/images/avatar.png';
 import getAllArticles from './GetAllArticlesAction';
+import LikeDilsikeArticle from '../likeDislikeArticles/LikeDislikeComponent';
 import './GetAllArticles.scss';
 
 export class GetAllArticles extends Component {
@@ -22,6 +23,8 @@ export class GetAllArticles extends Component {
           <div className="main--banner__text">
             <h1 className="heading__3">
               Authors <br />
+              {' '}
+              <br />
               Haven
             </h1>
             <h3 className="heading__4">Create and Read Articles</h3>
@@ -31,7 +34,11 @@ export class GetAllArticles extends Component {
         <div className="main-content">
           {articles.length !== 0 ? (
             articles.map(article => (
-              <Link to="#!" key={article.slug} className="link">
+              <Link
+                to={`/articles/${article.slug}`}
+                key={article.slug}
+                className="link"
+              >
                 <div className="article article-main--wrapper">
                   <div className="article__image">
                     <img
@@ -67,6 +74,11 @@ export class GetAllArticles extends Component {
                         {article.description}
                       </div>
                     </div>
+                    <hr className="divider" />
+                    <LikeDilsikeArticle
+                      likes={article.likes}
+                      dislikes={article.dislikes}
+                    />
                   </div>
                 </div>
               </Link>
@@ -75,6 +87,7 @@ export class GetAllArticles extends Component {
             <div className="article__error">
               <h2>
                 Sorry No Articles Found At The Moment. <br />
+                {' '}
                 Please Create one or comeback later!!!
               </h2>
             </div>

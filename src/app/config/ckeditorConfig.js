@@ -48,7 +48,7 @@ const editorConfigs = {
     'undo',
     'redo'
   ],
-  blockToolbar: ['heading', 'blockQuote', 'imageUpload'],
+  blockToolbar: ['heading', 'blockQuote', 'imageUpload', 'ImageResize', 'ImageStyle'],
   removePlugins: ['List', 'Table', 'TableToolbar', 'MediaEmbed'],
   extraPlugins: [UploadAdapterPlugin]
 };

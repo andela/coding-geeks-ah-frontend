@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 import GetAllArticles from '../feature/articles/getArticles/GetAllArticlesComponent';
+import GetSingleArticle from '../feature/articles/getSingleArticle/GetSingleArticleComponent';
 import CreateArticle from '../feature/articles/createArticle/CreateArticleComponent';
 import ProtectedRoutes from '../feature/protectedRoutes/ProtectedRoutesComponent';
 import Nav from './routes/Nav';
@@ -12,8 +13,7 @@ import SignUp from '../feature/auth/signup/SignUpComponent';
 import Login from '../feature/auth/login/LoginComponent';
 import ForgotPassword from '../feature/Reset Password/forgot password/ForgotPasswordComponent';
 import ResetPassword from '../feature/Reset Password/reset password/ResetPasswordComponent';
-import SingleArticle from '../feature/article/getSingleArticle/ReadSingleArticleComponent';
-import FollowComponent from '../feature/followUnfollow/FollowUnfollow';
+import FollowUnfollowComponent from '../feature/followUnfollow/FollowUnfollowComponent';
 
 toast.configure();
 function App() {
@@ -31,12 +31,13 @@ function App() {
             component={ResetPassword}
           />
           <Route exact path="/" component={GetAllArticles} />
+          <ProtectedRoutes path="/Create" component={CreateArticle} />
           <Route path="/login" component={Login} />
           <Route path="/Signup" component={SignUp} />
-          <Route path="/articles/:slug" component={SingleArticle} />
           <ProtectedRoutes path="/Create" component={CreateArticle} />
-          <Route path="/profiles/:userName/follow" component={FollowComponent} />
-          <Route path="/profiles/:userName/unfollow" component={FollowComponent} />
+          <Route path="/profiles/:userName/follow" component={FollowUnfollowComponent} />
+          <Route path="/profiles/:userName/unfollow" component={FollowUnfollowComponent} />
+          <Route path="/articles/:slug" component={GetSingleArticle} />
         </Switch>
       </BrowserRouter>
     </div>
