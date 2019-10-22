@@ -1,0 +1,149 @@
+.grid-container {
+  &__form {
+    width: 50%;
+    justify-content: center;
+    margin-left: 35%;
+  }
+
+  &__label {
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__btn {
+    margin: 6% 0 0 0;
+    padding: 8px;
+    color: #599bda;
+    border-color: #599bda;
+    border-radius: 15px;
+    outline: none;
+    font-size: 16px;
+    width: 12%;
+    cursor: pointer;
+  }
+
+  &__file {
+    margin-top: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  &__textarea {
+    border: 1px solid #282c34;
+    margin: 5px 0 15px;
+    width: 60%;
+    padding: 8px;
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+}
+}
+
+
+/* 
+  ##Devices = Tablets, Ipad Pro (portrait)
+  ##Screen = B/w 901px to 1024px
+*/
+
+@media (min-width: 901px) and (max-width: 1024px) {
+  .grid-container {
+    &__btn {
+      margin-top: 10%;
+      width: 18%;   
+    }
+  }
+}
+
+
+/* 
+  ##Devices = Tablets, Nexus 10, Ipad Mini (portrait)
+  ##Screen = B/w 768px to 900px
+*/
+
+@media (min-width: 768px) and (max-width: 900px) {
+  .grid-container {
+    &__btn {
+      margin-top: 10%;
+      width: 22%;
+    }
+  }
+}
+
+/* 
+  ##Devices = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 400px to 480px
+*/
+
+@media (min-width: 400px) and (max-width: 480px) {
+  .title {
+    margin-bottom: 5%;
+  }
+  .grid-container {
+    &__btn {
+      margin-top: 10%;
+      width: 21%;
+      font-size: 13px;
+    }
+
+    &__form {
+      width: 100%;
+      margin-left: 0;
+      padding-left: 27%;
+    }
+
+    
+    &__textarea {
+      font-size: 13px;
+    }
+
+    &__label {
+      font-size: 14px;
+    }
+
+    &__file {
+      font-size: 13px;
+    }
+  }
+}
+
+/* 
+  ##Device = Most of the Smallest Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 399px
+*/
+
+@media (min-width: 320px) and (max-width: 399px) {
+  .title {
+    margin-bottom: 5%;
+  }
+  .grid-container {
+    &__btn {
+      margin-top: 10%;
+      width: 24%;
+      font-size: 12px;
+      margin-left: 6%;
+    }
+
+    &__form {
+      width: 100%;
+      margin-left: 0px;
+      padding-left: 19%;
+      left: 10%;
+    }
+
+    &__textarea {
+      font-size: 12px;
+      margin-left: 6%;
+    }
+
+    &__label {
+      font-size: 13px;
+      margin-left: 6%;
+    }
+
+    &__file {
+      font-size: 12px;
+      margin-left: 6%;
+    }
+  }
+}

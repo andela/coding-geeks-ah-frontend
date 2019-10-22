@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import QueryString from 'query-string';
 import { login } from './LoginAction';
+import Social from '../socialLogin/SocialComponent';
 import './Login.scss';
 
 export class Login extends Component {
@@ -29,7 +30,7 @@ export class Login extends Component {
   redirectOnSuccess = () => {
     const { isAuthenticated, location } = this.props;
     const { redirectTo } = QueryString.parse(location.search);
-    return isAuthenticated ? this.props.history.push(redirectTo || '/') : null;
+    return isAuthenticated ? this.props.history.push(redirectTo || '/profile') : null;
   };
 
   handleSubmit = e => {
@@ -61,23 +62,23 @@ export class Login extends Component {
                 <div className="field">
                   <div className="form-group">
                     <input
-                      className="loginInput"
                       type="email"
                       placeholder="Email"
                       name="email"
                       value={email}
                       onChange={this.onChange}
+                      className="form-input"
                       required
                     />
                   </div>
                   <div className="form-group">
                     <input
-                      className="loginInput"
                       type="password"
                       placeholder="Password"
                       name="password"
                       value={password}
                       onChange={this.onChange}
+                      className="form-input"
                       required
                     />
                   </div>
@@ -95,15 +96,7 @@ export class Login extends Component {
               </form>
             </div>
             <div className="social-login-control col">
-              <button type="submit" className="social-login-btn btn-google">
-                LOGIN WITH GOOGLE
-              </button>
-              <button type="submit" className="social-login-btn btn-twitter">
-                LOGIN WITH TWITTER
-              </button>
-              <button type="submit" className="social-login-btn btn-facebook">
-                LOGIN WITH FACEBOOK
-              </button>
+              <Social />
             </div>
           </div>
         </div>

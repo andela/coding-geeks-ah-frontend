@@ -1,0 +1,9 @@
+.share-article {
+  background: blue;
+
+  &__btn {
+    float: left;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+}

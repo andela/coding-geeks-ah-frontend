@@ -8,9 +8,10 @@ import GetAllArticles from '../feature/articles/getArticles/GetAllArticlesCompon
 import GetSingleArticle from '../feature/articles/getSingleArticle/GetSingleArticleComponent';
 import CreateArticle from '../feature/articles/createArticle/CreateArticleComponent';
 import ProtectedRoutes from '../feature/protectedRoutes/ProtectedRoutesComponent';
-import Nav from './routes/Nav';
 import SignUp from '../feature/auth/signup/SignUpComponent';
 import Login from '../feature/auth/login/LoginComponent';
+import Profile from '../feature/profile/view_profile/ViewProfileComponent';
+import UpdateProfile from '../feature/profile/update_profile/UpdateProfileComponent';
 import ForgotPassword from '../feature/Reset Password/forgot password/ForgotPasswordComponent';
 import ResetPassword from '../feature/Reset Password/reset password/ResetPasswordComponent';
 import FollowUnfollowComponent from '../feature/followUnfollow/FollowUnfollowComponent';
@@ -20,9 +21,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <header className="App-header">
-          <Nav />
-        </header>
+        {/* <Nav /> */}
         <ToastContainer />
         <Switch>
           <Route path="/forgot" component={ForgotPassword} />
@@ -33,6 +32,9 @@ function App() {
           <Route exact path="/" component={GetAllArticles} />
           <ProtectedRoutes path="/Create" component={CreateArticle} />
           <Route path="/login" component={Login} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/update-profile" component={UpdateProfile} />
           <Route path="/Signup" component={SignUp} />
           <ProtectedRoutes path="/Create" component={CreateArticle} />
           <Route path="/profiles/:userName/follow" component={FollowUnfollowComponent} />

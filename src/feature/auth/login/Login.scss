@@ -44,15 +44,17 @@
     outline: none;
   }
 }
-
-.logininput[type='email'] {
+:focus {
+  outline: 0;
+}
+.form-input[type='email'] {
   font-size: 15px;
   color: #000000;
 }
-.logininput[type='password'] {
+.form-input[type='password'] {
   font-size: 15px;
 }
-.logininput::placeholder {
+.form-input::placeholder {
   color: #000000;
   letter-spacing: 1px;
 }
@@ -66,21 +68,18 @@
   font-size: 14px;
 }
 .loginBtn {
+  margin: 3% 0 0 5%;
+  padding: 9px;
+  color: #599bda;
+  border-color: #599bda;
   border-radius: 15px;
-  border: 1px solid #599bda;
+  outline: none;
   font-size: 16px;
-  width: 25%;
+  width: 100px;
   padding: 5px 30px;
   color: #599bda;
   background: #ffffff;
   cursor: pointer;
-  margin-top: 0px;
-  &:focus {
-    outline: none;
-  }
-}
-.social-login-control {
-  padding-top: 50px;
 }
 .social-login-btn {
   border: none;
@@ -91,18 +90,6 @@
   outline: none;
   color: #ffffff;
   cursor: pointer;
-}
-.social-login-btn:hover {
-  cursor: pointer;
-}
-.btn-google {
-  background: #d9483b;
-}
-.btn-twitter {
-  background: #3dadf2;
-}
-.btn-facebook {
-  background: #355b8c;
 }
 
 @media screen and (max-width: 900px) and (min-width: 700px) {
@@ -124,7 +111,7 @@
   .form-control {
     border-right: none;
   }
-  .loginInput {
+  .form-input {
     width: 90%;
     height: 40px;
     border-top: 0;
@@ -144,9 +131,24 @@
     cursor: pointer;
     font-size: 16px;
   }
+  .social-login-img {
+    width: 80%;  
+  }
+  .btn {
+    width: 40%;
+  }
 }
 @media screen and (max-width: 700px) {
   .social-login-control {
     margin-bottom: 60px;
+  }
+  .field span {
+    visibility: visible;
+  }
+}
+@media screen and (max-width: 850px) {
+  .row {
+    width: 70%;
+    margin: auto;
   }
 }

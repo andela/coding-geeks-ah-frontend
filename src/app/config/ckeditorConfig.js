@@ -46,7 +46,9 @@ const editorConfigs = {
     'blockQuote',
     'imageUpload',
     'undo',
-    'redo'
+    'redo',
+    'bulletedList',
+    'numberedList'
   ],
   blockToolbar: ['heading', 'blockQuote', 'imageUpload', 'ImageResize', 'ImageStyle'],
   removePlugins: ['List', 'Table', 'TableToolbar', 'MediaEmbed'],

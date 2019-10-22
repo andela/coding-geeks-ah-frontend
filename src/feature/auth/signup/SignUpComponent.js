@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import registerUser from './SignUpAction';
+import SocialLogin from '../socialLogin/SocialComponent';
 import './SignUpStyle.scss';
 
 class SignUp extends Component {
@@ -32,7 +33,7 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <div className="heading">
           <h1 className="heading__title">Sign Up</h1>
           <p className="heading__body">
@@ -111,26 +112,7 @@ class SignUp extends Component {
             </form>
           </div>
           <div className="flex-container__right-section">
-            <button
-              type="submit"
-              className="flex-container__social-btn flex-container__google-btn"
-            >
-              LOGIN WITH GOOGLE
-            </button>
-            <br />
-            <button
-              type="submit"
-              className="flex-container__social-btn flex-container__twitter-btn"
-            >
-              LOGIN WITH TWITTER
-            </button>
-            <br />
-            <button
-              type="submit"
-              className="flex-container__social-btn flex-container__facebook-btn"
-            >
-              LOGIN WITH FACEBOOK
-            </button>
+            <SocialLogin />
           </div>
         </div>
       </div>

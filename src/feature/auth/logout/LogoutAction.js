@@ -23,7 +23,8 @@ export const logout = () => async (dispatch) => {
     }
   };
   try {
-    const send = await axios.post(`${BACKEND_URL}/users/logout`, {}, axiosConfig);
+    const send = await axios
+      .post(`${BACKEND_URL}/users/logout`, {}, axiosConfig);
     const { data } = send;
     const { message } = data;
     localStorage.clear();
@@ -31,7 +32,8 @@ export const logout = () => async (dispatch) => {
     toast.success(message);
     dispatch(logoutSuccess(message));
   } catch (error) {
-    const message = (await error.response) ? error.response.data.error : 'Something wrong';
+    const message = (await error.response)
+      ? error.response.data.error : 'Something wrong';
     toast.error(message);
     dispatch(logoutError(message));
   }

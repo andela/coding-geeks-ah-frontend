@@ -6,10 +6,12 @@ import { BACKEND_URL } from '../../../app/common/config/appConfig';
 const getAllArticles = () => async dispatch => {
   try {
     const res = await axios.get(`${BACKEND_URL}/articles/`);
+
     dispatch({
       type: GET_ARTICLES_SUCCESS,
       payload: res.data
     });
+    return true;
   } catch (err) {
     const error = (await err.response)
       ? err.response.data.error

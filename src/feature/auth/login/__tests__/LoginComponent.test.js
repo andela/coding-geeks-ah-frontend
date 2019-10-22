@@ -1,21 +1,31 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable react/jsx-props-no-spreading */
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import React from 'react';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import LoginComponent, { Login } from '../LoginComponent';
-import store from '../../../../app/store/index';
+
+// import store from '../../../../app/store/index';
+// import Social from '../SocialComponent';
+
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+let store;
 
 const renderLogin = (args) => {
   const defaultProps = {
     isAuthenticated: true,
     login: jest.fn(),
+    social: jest.fn(),
     history: {
       push: jest.fn(),
     },
   };
   const props = { ...defaultProps, ...args };
-  return mount(<Login {...props} />);
+  store = mockStore({ ...props });
+  return shallow(<Login {...props} />);
 };
 
 const wrapper = renderLogin();

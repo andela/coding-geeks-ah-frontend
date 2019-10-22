@@ -57,9 +57,6 @@ describe('SignUp Component Tests', () => {
   });
   it('should find all buttons', () => {
     expect(button.at(0).text()).toEqual('Sign Up');
-    expect(button.at(1).text()).toEqual('LOGIN WITH GOOGLE');
-    expect(button.at(2).text()).toEqual('LOGIN WITH TWITTER');
-    expect(button.at(3).text()).toEqual('LOGIN WITH FACEBOOK');
   });
   it('should find the type and click on the signup button', () => {
     expect(button.at(0).prop('type')).toEqual('submit');

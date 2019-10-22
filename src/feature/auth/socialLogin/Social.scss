@@ -1,0 +1,28 @@
+.social-login-img {
+    width: 100%;
+    height: 45px;
+    border-radius: 20px;
+    margin: 0px;
+}
+.social-login-link {
+    background-repeat: no-repeat;
+    min-width: 100%;
+    padding: 0px;
+    border-style: none;
+    margin: 5px;
+    background-color: white;
+}
+.social-login-link:hover {
+    cursor: pointer;
+}
+.social-login-div {
+    padding: 2rem;
+}
+
+@media screen and (max-width: 700px){
+    .social-login-img {
+        width: 100%;
+        height: 30px;
+        
+    }
+}

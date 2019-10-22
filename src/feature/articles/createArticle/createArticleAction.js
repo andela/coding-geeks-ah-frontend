@@ -17,13 +17,16 @@ const createArticle = (
       Authorization: token
     }
   };
-  const formData = {
+  let formData = {};
+  formData.tags = tags || '';
+  formData.category = category || '';
+
+  formData = {
     title,
     description,
-    tags,
-    category,
     body
   };
+
   try {
     const res = await axios.post(
       `${BACKEND_URL}/articles/`,
