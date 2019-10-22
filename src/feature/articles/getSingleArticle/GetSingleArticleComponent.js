@@ -1,25 +1,22 @@
 /* eslint-disable import/no-named-as-default */
-/* eslint-disable consistent-return */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { Link, BrowserRouter } from 'react-router-dom';
 import momemt from 'moment';
 import ReactHtmlParser from 'react-html-parser';
 import GetSingleArticle from './GetSingleArticleAction';
 import LikeDislikeArticle from '../likeDislikeArticles/LikeDislikeComponent';
+import FollowUnfollowComponent from '../../followUnfollow/FollowUnfollowComponent';
 import StarRating from '../starRating/StarRatingComponent';
 import AverageRating from '../averageRating/AverageRatingComponent';
-import {
-  likeArticle,
-  dislikeArticle
-} from '../likeDislikeArticles/LikeDislikeAction';
+import DisabledStar from '../starRating/DisabledStarComponent';
 import DefaultAvatar from '../../../app/common/images/avatar.png';
 import ellipsis from '../../../app/common/images/ellipsis.png';
 import bookmark from '../../../app/common/images/bookmark.png';
+import ShareArticle from '../shareArticle/ShareArticleComponent';
 import './GetSingleArticle.scss';
-import FollowUnfollowComponent from '../../followUnfollow/FollowUnfollowComponent';
 
 export class ViewSingleArticle extends Component {
   componentDidMount() {
@@ -27,31 +24,6 @@ export class ViewSingleArticle extends Component {
     const { slug } = this.props.match.params;
     GetSingleArticle(slug);
   }
-
-  handleLike = () => {
-    const { slug } = this.props.match.params;
-    const token = localStorage.getItem('token');
-    const { likeArticle } = this.props;
-
-    if (!token) {
-      return toast.error('Please Login is Register to like this article', {
-        position: toast.POSITION.TOP_CENTER
-      });
-    }
-    likeArticle(slug);
-  };
-
-  handleDislike = () => {
-    const { slug } = this.props.match.params;
-    const token = localStorage.getItem('token');
-    const { dislikeArticle } = this.props;
-    if (!token) {
-      return toast.error('Please Login is Register to Dislike this article', {
-        position: toast.POSITION.TOP_CENTER
-      });
-    }
-    dislikeArticle(slug);
-  };
 
   render() {
     const {
@@ -70,15 +42,18 @@ export class ViewSingleArticle extends Component {
       }
     } = this.props.article;
     const { userName, image } = author;
+    const { user } = this.props.currentUser;
+    const ownArticle = userName === user.username;
     return (
       <div className="wrapper">
         <div className="heading">
           <div className="heading__left">
             <span>
-              <div>
+              <div className="heading__follow">
                 <FollowUnfollowComponent
                   authorId={authorId}
                   username={userName}
+                  pathname={this.props.location.pathname}
                 />
               </div>
             </span>
@@ -113,11 +88,11 @@ export class ViewSingleArticle extends Component {
             <div className="heading__right-item">
               <span className="bookmark">
                 {' '}
-                <img src={bookmark} alt="" />
+                <img src={bookmark} className="heading__bookmark" alt="" />
                 {' '}
               </span>
               <span className="menu">
-                <img src={ellipsis} alt=" " />
+                <img src={ellipsis} className="heading__menu" alt=" " />
               </span>
             </div>
           </div>
@@ -136,28 +111,42 @@ export class ViewSingleArticle extends Component {
               <span>7 reads</span>
             </div>
             <div className="status__comment">
-              <Link to="#?" className="status__comment">
-                4 comments
-              </Link>
+              <BrowserRouter>
+                <Link to="#?" className="status__comment">
+                  4 comments
+                </Link>
+              </BrowserRouter>
             </div>
             <div className="status__like">
               <span>
                 <LikeDislikeArticle
-                  className="likes-dislikes"
-                  handleDislike={this.handleDislike}
-                  handleLike={this.handleLike}
                   likes={likes}
                   dislikes={dislikes}
+                  slug={this.props.match.params.slug}
                 />
               </span>
             </div>
             <div className="status__rate">
-              <span className="status__rate">
-                <StarRating
-                  articleId={id}
-                  pathname={this.props.location.pathname}
-                />
-              </span>
+              {ownArticle ? (
+                <span className="status__rate">
+                  <DisabledStar />
+                </span>
+              ) : (
+                <span className="status__rate">
+                  <StarRating
+                    articleId={id}
+                    pathname={this.props.location.pathname}
+                  />
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="tags-share-container">
+            <div>
+              <button type="button">Tags Carlos Tech Andela</button>
+            </div>
+            <div className="share-buttons">
+              <ShareArticle />
             </div>
           </div>
         </div>
@@ -165,11 +154,19 @@ export class ViewSingleArticle extends Component {
     );
   }
 }
-const mapStateToProps = ({ getSingleArticle }) => ({
-  article: getSingleArticle
+const mapStateToProps = ({ getSingleArticle, login }) => ({
+  article: getSingleArticle,
+  currentUser: login,
+  isAuthenticated: login
 });
+
+ViewSingleArticle.defaultProps = {
+  location: {
+    pathname: ''
+  }
+};
 
 export default connect(
   mapStateToProps,
-  { likeArticle, dislikeArticle, GetSingleArticle }
+  { GetSingleArticle }
 )(ViewSingleArticle);

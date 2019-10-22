@@ -1,12 +1,8 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { BACKEND_URL } from '../../../app/common/config/appConfig';
-import {
-  LIKE_ARTICLE_SUCCESS,
-  LIKE_ARTICLE_FAIL,
-  DISLIKE_ARTICLE_FAIL,
-  DISLIKE_ARTICLE_SUCCESS
-} from '../constants';
+import getSingleArticle from '../getSingleArticle/GetSingleArticleAction';
+import { LIKE_ARTICLE_FAIL, DISLIKE_ARTICLE_FAIL } from '../constants';
 
 const token = localStorage.getItem('token');
 
@@ -23,12 +19,7 @@ export const likeArticle = slug => async dispatch => {
       {},
       axiosConfig
     );
-    const res = await axios.get(`${BACKEND_URL}/articles/${slug}`);
-
-    dispatch({
-      type: LIKE_ARTICLE_SUCCESS,
-      payload: res.data
-    });
+    dispatch(getSingleArticle(slug));
     toast.success(data.message, { position: toast.POSITION.TOP_CENTER });
   } catch (err) {
     const error = (await err.response)
@@ -46,13 +37,9 @@ export const dislikeArticle = slug => async dispatch => {
       {},
       axiosConfig
     );
-    const res = await axios.get(`${BACKEND_URL}/articles/${slug}`);
-    toast.success(data.message, { position: toast.POSITION.TOP_CENTER });
 
-    dispatch({
-      type: DISLIKE_ARTICLE_SUCCESS,
-      payload: res.data
-    });
+    dispatch(getSingleArticle(slug));
+    toast.warn(data.message, { position: toast.POSITION.TOP_CENTER });
   } catch (err) {
     const error = (await err.response)
       ? err.response.data.error

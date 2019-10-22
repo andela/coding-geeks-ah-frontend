@@ -1,4 +1,5 @@
 import {
+  CLEAR_FOLLOW,
   FOLLOW_AUTHOR_SUCCESS,
   FOLLOW_AUTHOR_FAIL,
   UNFOLLOW_AUTHOR_SUCCESS,
@@ -14,6 +15,10 @@ const initialState = {
 const followReducers = (state = initialState, action) => {
   const { payload, type } = action;
   switch (type) {
+    case CLEAR_FOLLOW: return {
+      ...state,
+      following: []
+    };
     case GET_FOLLOWING_AUTHOR_SUCCESS: return {
       ...state,
       following: payload.data

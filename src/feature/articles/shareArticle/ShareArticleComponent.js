@@ -16,7 +16,11 @@ const ShareArticle = () => {
       <FacebookShareButton className="share-article__btn" url={articleToShare}>
         <FacebookIcon size={32} round />
       </FacebookShareButton>
-      <TwitterShareButton className="share-article__btn" url={articleToShare} hashtags={['Coding-geeks']}>
+      <TwitterShareButton
+        className="share-article__btn"
+        url={articleToShare}
+        hashtags={['Coding-geeks']}
+      >
         <TwitterIcon size={32} round />
       </TwitterShareButton>
       <EmailShareButton

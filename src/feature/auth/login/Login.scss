@@ -33,7 +33,9 @@
   height: 60px;
   margin-top: 10px;
 }
-.loginInput {
+.form-input {
+  padding: 8px;
+  font-size: 15px;
   width: 90%;
   height: 40px;
   border-top: 0;
@@ -67,6 +69,7 @@
   color: #868383;
   font-size: 14px;
 }
+
 .loginBtn {
   margin: 3% 0 0 5%;
   padding: 9px;

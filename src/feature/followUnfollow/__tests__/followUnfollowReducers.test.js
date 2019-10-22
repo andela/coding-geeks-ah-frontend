@@ -5,7 +5,8 @@ import {
   FOLLOW_AUTHOR_FAIL,
   UNFOLLOW_AUTHOR_SUCCESS,
   UNFOLLOW_AUTHOR_FAIL,
-  GET_FOLLOWING_AUTHOR_SUCCESS
+  GET_FOLLOWING_AUTHOR_SUCCESS,
+  CLEAR_FOLLOW
 } from '../followUnfollowTypes';
 
 describe('FOLLOW AUTHOR', () => {
@@ -62,6 +63,16 @@ describe('GET FOLLOWING', () => {
       type: GET_FOLLOWING_AUTHOR_SUCCESS,
       follow: undefined,
       payload: {}
+    });
+    expect(reducer).toHaveProperty('following');
+  });
+});
+
+describe('CLEAR FOLLOWING', () => {
+  test('CLEAR FOLLOWING', () => {
+    const reducer = followReducers(initialState, {
+      type: CLEAR_FOLLOW,
+      follow: undefined,
     });
     expect(reducer).toHaveProperty('following');
   });

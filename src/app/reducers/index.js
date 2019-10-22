@@ -8,7 +8,6 @@ import resetPasswordReducer from '../../feature/Reset Password/reset password/re
 import article from '../../feature/articles/createArticle/createArticleReducer';
 import getAllArticles from '../../feature/articles/getArticles/GetAllArticleReducer';
 import followReducer from '../../feature/followUnfollow/followUnfollowReducer';
-
 import getSingleArticle from '../../feature/articles/getSingleArticle/GetSingleArticleReducer';
 import socialReducer from '../../feature/auth/socialLogin/SocialReducer';
 

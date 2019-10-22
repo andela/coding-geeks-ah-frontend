@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { GET_SINGLE_ARTICLE_SUCCESS, GET_SINGLE_ARTICLE_FAIL } from '../constants';
+import {
+  GET_SINGLE_ARTICLE_SUCCESS,
+  GET_SINGLE_ARTICLE_FAIL
+} from '../constants';
 import { BACKEND_URL } from '../../../app/common/config/appConfig';
 
-const getAllArticles = slug => async dispatch => {
+const getSingleArticle = slug => async dispatch => {
   try {
     const { data } = await axios.get(`${BACKEND_URL}/articles/${slug}`);
     dispatch({
@@ -19,4 +22,4 @@ const getAllArticles = slug => async dispatch => {
   }
 };
 
-export default getAllArticles;
+export default getSingleArticle;

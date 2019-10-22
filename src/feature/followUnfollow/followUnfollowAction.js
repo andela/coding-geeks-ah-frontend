@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import axiosConfig from '../../app/common/config/axiosConfig';
 import {
+  CLEAR_FOLLOW,
   FOLLOW_AUTHOR_SUCCESS,
   UNFOLLOW_AUTHOR_SUCCESS,
   FOLLOW_AUTHOR_FAIL,
@@ -10,18 +12,15 @@ import {
 } from './followUnfollowTypes';
 import { BACKEND_URL } from '../../app/common/config/appConfig';
 
-const { token, username } = localStorage;
-const axiosConfig = {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: token
-  }
-};
+
+export const clearFollowing = () => (dispatch) => dispatch({ type: CLEAR_FOLLOW });
 
 export const getFollowing = () => async (dispatch) => {
   try {
+    const { token, username } = localStorage;
+    const headers = { ...axiosConfig.headers, Authorization: token };
     const res = await axios.get(
-      `${BACKEND_URL}/profiles/${username}/following`, axiosConfig
+      `${BACKEND_URL}/profiles/${username}/following`, { ...axiosConfig, headers }
     );
 
     dispatch({
@@ -36,6 +35,13 @@ export const getFollowing = () => async (dispatch) => {
 };
 
 export const followAuthor = (username) => async (dispatch) => {
+  const { token } = localStorage;
+  const axiosConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    }
+  };
   try {
     const res = await axios.post(
       `${BACKEND_URL}/profiles/${username}/follow`, {}, axiosConfig
@@ -53,6 +59,13 @@ export const followAuthor = (username) => async (dispatch) => {
 };
 
 export const unfollowAuthor = (username) => async (dispatch) => {
+  const { token } = localStorage;
+  const axiosConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    }
+  };
   try {
     const res = await axios.delete(
       `${BACKEND_URL}/profiles/${username}/unfollow`, axiosConfig

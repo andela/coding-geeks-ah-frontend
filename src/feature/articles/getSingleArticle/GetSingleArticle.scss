@@ -29,13 +29,19 @@
     color: black;
     font-weight: bold;
     font-size: 18px;
+    position: relative;
+    top: 0.5em;
   }
   &__munite {
     font-size: 13px;
     margin-left: 10px;
+    position: relative;
+    top: 1.5em;
   }
   &__avarageRating {
     margin-left: 2.5em;
+    position: relative;
+    top: 1.5em;
   }
   &__right-item {
     float: right;
@@ -51,9 +57,10 @@
   }
 }
 .status {
-  text-decoration: none;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  height: 50px;
+
   > div {
     width: 25%;
     text-align: center;
@@ -62,6 +69,73 @@
     text-decoration: none;
     &:hover {
       cursor: pointer;
+    }
+  }
+}
+.tags-share-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  > div {
+    width: 50%;
+    text-align: center;
+  }
+  .share-buttons {
+    .share-article {
+      float: right;
+      height: 50px;
+      text-align: center;
+      margin-right: 10%;
+    }
+  }
+}
+@media screen and (max-width: 700px) {
+  .wrapper {
+    width: 90%;
+    padding: 5px;
+  }
+
+  .heading {
+    align-items: stretch;
+
+    &__left {
+      flex-basis: 80%;
+    }
+    &__right {
+      flex-basis: 20%;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .heading {
+    &__bookmark {
+      width: 20px;
+    }
+    &__menu {
+      width: 20px;
+    }
+  }
+  .share-buttons {
+    .share-article {
+      position: absolute;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .heading {
+    &__name {
+      font-size: 12px;
+    }
+    &__munite {
+      font-size: 9px;
+    }
+  }
+  .status {
+    > div {
+      width: 50%;
+      text-align: center;
     }
   }
 }

@@ -1,7 +1,4 @@
-import {
-  CREATE_ARTICLE_SUCCESS,
-  CREATE_ARTICLE_FAIL
-} from '../constants';
+import { CREATE_ARTICLE_SUCCESS, CREATE_ARTICLE_FAIL } from '../constants';
 import createArticleReducer, {
   initialState
 } from '../createArticle/createArticleReducer';
@@ -17,8 +14,12 @@ describe('Create Article reducer', () => {
       }
     });
     expect(reducer.title).toEqual('So I the last one standing');
-    expect(reducer.description).toEqual('I knew that would happen soon but i kept it inside');
-    expect(reducer.body).toEqual('I knew that would happen soon but i kept it inside');
+    expect(reducer.description).toEqual(
+      'I knew that would happen soon but i kept it inside'
+    );
+    expect(reducer.body).toEqual(
+      'I knew that would happen soon but i kept it inside'
+    );
   });
 
   it('Should test CREATE_ARTICLE_FAIL', () => {

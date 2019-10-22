@@ -2,7 +2,10 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import axios from 'axios';
-import { getFollowing, followAuthor, unfollowAuthor } from '../followUnfollowAction';
+import mockData from '../../../__mocks__/mockData';
+import {
+  getFollowing, followAuthor, unfollowAuthor, clearFollowing
+} from '../followUnfollowAction';
 import LocalStorage from '../../../__mocks__/localStorage';
 
 const middleware = [thunk];
@@ -11,7 +14,7 @@ const store = mockStore({});
 
 let storage;
 const token = 'Invalid token';
-describe('Follow Author Tests', () => {
+describe('FollowUnfollow ActionCreator', () => {
   beforeEach(() => {
     moxios.install(axios);
     storage = window.localStorage.setItem('token', token);
@@ -22,23 +25,20 @@ describe('Follow Author Tests', () => {
     store.clearActions();
     window.localStorage = storage;
   });
-  test('Follow Author Tests', () => {
+  it('Follow Author Tests', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200,
-        response: {
-          data: {
-            message: 'Successfully rated this article'
-          }
-        }
+        response: mockData.followSucces
       });
     });
+    const expectedAction = [{ payload: mockData.followSucces, type: 'FOLLOW_AUTHOR_SUCCES' }];
     return store.dispatch(followAuthor()).then(() => {
-      expect(store.getActions().length).toEqual(1);
+      expect(store.getActions()).toEqual(expectedAction);
     });
   });
-  test('Follow Author Fail', () => {
+  it('Follow Author Fail', () => {
     const expected = {
       data: {
         error: 'Bad request',
@@ -52,7 +52,7 @@ describe('Follow Author Tests', () => {
       expect(store.getActions().length).toEqual(1);
     });
   });
-  test('Follow Author Fail for network', () => {
+  it('Follow Author Fail for network', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -80,15 +80,13 @@ describe('unfollowAuthor', () => {
     store.clearActions();
     window.localStorage = storage;
   });
-  test('unfollowAuthor testing success', () => {
+  it('unfollowAuthor testing success', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200,
         response: {
-          data: {
-            message: 'Successfully rated this article'
-          }
+          data: mockData.unfollowSucces
         }
       });
     });
@@ -96,7 +94,7 @@ describe('unfollowAuthor', () => {
       expect(store.getActions().length).toEqual(1);
     });
   });
-  test('unfollowAuthor testing for fail', () => {
+  it('unfollowAuthor testing for fail', () => {
     const expected = {
       data: {
         error: 'Bad request',
@@ -110,7 +108,7 @@ describe('unfollowAuthor', () => {
       expect(store.getActions().length).toEqual(1);
     });
   });
-  test('unfollowAuthor testing network error', () => {
+  it('unfollowAuthor testing network error', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -137,23 +135,18 @@ describe('getFollowing', () => {
     store.clearActions();
     window.localStorage = storage;
   });
-  test('getFollowing testing success ', () => {
+  it('getFollowing testing success ', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
-        status: 200,
-        response: {
-          data: {
-            message: 'Successfully rated this article'
-          }
-        }
+        status: 200
       });
     });
     return store.dispatch(getFollowing()).then(() => {
       expect(store.getActions().length).toEqual(1);
     });
   });
-  test('getFollowing testing fail', () => {
+  it('getFollowing testing fail', () => {
     const expected = {
       data: {
         error: 'Bad request',
@@ -167,7 +160,7 @@ describe('getFollowing', () => {
       expect(store.getActions().length).toEqual(1);
     });
   });
-  test('getFollowing testing network error', () => {
+  it('getFollowing testing network error', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -180,5 +173,9 @@ describe('getFollowing', () => {
     return store.dispatch(getFollowing()).then(() => {
       expect(store.getActions().length).toEqual(1);
     });
+  });
+  it('clear follow', () => {
+    store.dispatch(clearFollowing());
+    expect(store.getActions().length).toEqual(1);
   });
 });

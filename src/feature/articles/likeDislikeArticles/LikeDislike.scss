@@ -19,8 +19,10 @@
 }
 .likes {
   margin-right: 10px;
+  &:focus {
+    background: blue;
+  }
 }
 .dislikes {
   margin-left: 3em;
 }
-

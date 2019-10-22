@@ -15,13 +15,14 @@ import UpdateProfile from '../feature/profile/update_profile/UpdateProfileCompon
 import ForgotPassword from '../feature/Reset Password/forgot password/ForgotPasswordComponent';
 import ResetPassword from '../feature/Reset Password/reset password/ResetPasswordComponent';
 import FollowUnfollowComponent from '../feature/followUnfollow/FollowUnfollowComponent';
+import Home from '../feature/homePage/Home';
 
 toast.configure();
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {/* <Nav /> */}
+        <Home />
         <ToastContainer />
         <Switch>
           <Route path="/forgot" component={ForgotPassword} />
@@ -36,7 +37,6 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/update-profile" component={UpdateProfile} />
           <Route path="/Signup" component={SignUp} />
-          <ProtectedRoutes path="/Create" component={CreateArticle} />
           <Route path="/profiles/:userName/follow" component={FollowUnfollowComponent} />
           <Route path="/profiles/:userName/unfollow" component={FollowUnfollowComponent} />
           <Route path="/articles/:slug" component={GetSingleArticle} />

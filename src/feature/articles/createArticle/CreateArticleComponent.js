@@ -8,7 +8,6 @@ import createArticle from './createArticleAction';
 import editorConfigs from '../../../app/config/ckeditorConfig';
 import 'react-toastify/dist/ReactToastify.css';
 import './createArticle.scss';
-import Home from '../../homePage/Home';
 
 export class CreateArticle extends Component {
   constructor(props) {
@@ -32,7 +31,7 @@ export class CreateArticle extends Component {
       title, description, tags, category, body
     } = this.state;
     const { createArticle } = this.props;
-    const test = (!title || !description || !body);
+    const test = !title || !description || !body;
     const message = 'Please fill in Title, Description and Body  to create an article';
     return test
       ? toast.error(message, { position: toast.POSITION.TOP_CENTER })
@@ -54,7 +53,6 @@ export class CreateArticle extends Component {
     } = this.state;
     return (
       <>
-        <Home />
         <div className="mainDiv">
           <div className="input input--form">
             <input
@@ -116,7 +114,7 @@ export class CreateArticle extends Component {
                 type="submit"
                 onClick={this.handleSubmit}
               >
-              Create
+                Create
               </button>
             </div>
           </div>

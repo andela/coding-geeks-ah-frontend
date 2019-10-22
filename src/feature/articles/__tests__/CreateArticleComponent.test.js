@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { shallow } from 'enzyme';
-import '@ckeditor/ckeditor5-react';
-import '@ckeditor/ckeditor5-build-classic';
 import { CreateArticle } from '../createArticle/CreateArticleComponent';
 import dummyData from '../../../__mocks__/mockData';
 

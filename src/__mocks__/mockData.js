@@ -7,6 +7,24 @@ export default {
     body:
       'is simply dummy text of the printing and typesetting industry Lorem Ipsum has'
   },
+  article: {
+    title: 'Kigali the cleaniest city in Africa',
+    description:
+      'Kigali also known as a city of a thousand hills boasts itself with the cleaniest neighbourhood in Africa',
+    body:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+  },
+  createResponse: {
+    articles: [
+      {
+        title: 'Kigali the cleaniest city in Africa',
+        description:
+          'Kigali also known as a city of a thousand hills boasts itself with the cleaniest neighbourhood in Africa',
+        body:
+          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+      }
+    ]
+  },
 
   returnedArticle: {
     author: {
@@ -60,5 +78,29 @@ export default {
     category: 'Education',
     createdAt: '2019-10-10T08:34:04.511Z',
     description: 'I like creating a fontawesome.js in the src folder and.'
+  },
+  following:
+    [{
+      id: 111,
+      follower: 10,
+      following: 2,
+      updatedAt: '2019-10-24T09:01:56.240Z',
+      createdAt: '2019-10-24T09:01:56.240Z'
+    },
+    {
+      id: 222,
+      username: 'username',
+      following: 15,
+      updatedAt: '2019-10-24T09:01:56.240Z',
+      createdAt: '2019-10-24T09:01:56.240Z'
+    }],
+  followSucces: {
+    data: {
+      id: 11,
+      follower: 10,
+      following: 2,
+      updatedAt: '2019-10-24T09:01:56.240Z',
+      createdAt: '2019-10-24T09:01:56.240Z'
+    }
   }
 };

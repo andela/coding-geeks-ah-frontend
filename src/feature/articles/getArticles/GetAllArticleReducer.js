@@ -1,7 +1,8 @@
-import { GET_ARTICLES_SUCCESS, GET_ARTICLES_FAIL } from '../constants';
+import { GET_ARTICLES_SUCCESS, GET_ARTICLES_FAIL, LOADING } from '../constants';
 
 export const initialState = {
-  articles: []
+  articles: [],
+  loading: true
 };
 
 export default (state = initialState, action) => {
@@ -10,9 +11,12 @@ export default (state = initialState, action) => {
     case GET_ARTICLES_SUCCESS:
       return {
         ...state,
-        ...payload
+        ...payload,
+        loading: false
       };
     case GET_ARTICLES_FAIL:
+      return { ...state, ...payload };
+    case LOADING:
       return { ...state, ...payload };
     default:
       return {
