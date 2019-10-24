@@ -1,33 +1,40 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
 import { likeArticle, dislikeArticle } from './LikeDislikeAction';
-import LikeButton from '../../../app/common/images/like.png';
-import DislikeButton from '../../../app/common/images/dislike.png';
 import './LikeDislike.scss';
 
 export class LikeDislike extends Component {
   handleLike = () => {
-    const { slug, likeArticle, isAuthenticated } = this.props;
+    const {
+      slug,
+      likeArticle,
+      isAuthenticated,
+      history,
+      pathname
+    } = this.props;
 
     isAuthenticated
       ? likeArticle(slug)
-      : toast.error('Please Login is Register to like this article', {
-          position: toast.POSITION.TOP_CENTER
-        });
+      : history.push(`/login?redirectTo=${pathname}`);
   };
 
   handleDislike = () => {
-    const { slug, dislikeArticle, isAuthenticated } = this.props;
+    const {
+      slug,
+      dislikeArticle,
+      isAuthenticated,
+      history,
+      pathname
+    } = this.props;
     isAuthenticated
       ? dislikeArticle(slug)
-      : toast.error('Please Login is Register to dislike this article', {
-          position: toast.POSITION.TOP_CENTER
-        });
+      : history.push(`/login?redirectTo=${pathname}`);
   };
 
   render() {
@@ -36,14 +43,17 @@ export class LikeDislike extends Component {
     return (
       <div className="likeDislike-box">
         <div className="likes">
-          <img src={LikeButton} alt="" onClick={this.handleLike} id="likes" />
+          <i
+            className="fa fa-thumbs-o-up"
+            onClick={this.handleLike}
+            id="likes"
+          />
           <span className="likes__count">{likes}</span>
         </div>
 
         <div className="dislikes">
-          <img
-            src={DislikeButton}
-            alt=""
+          <i
+            className="fa fa-thumbs-o-down"
             onClick={this.handleDislike}
             id="dislikes"
           />
@@ -53,11 +63,11 @@ export class LikeDislike extends Component {
     );
   }
 }
-const mapStateToProps = ({ login }) => ({
-  isAuthenticated: login
+const mapStateToProps = state => ({
+  isAuthenticated: state.login.isAuthenticated
 });
 
 export default connect(
   mapStateToProps,
   { likeArticle, dislikeArticle }
-)(LikeDislike);
+)(withRouter(LikeDislike));

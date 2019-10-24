@@ -18,7 +18,7 @@ const getAllArticles = () => async dispatch => {
   } catch (err) {
     const error = (await err.response)
       ? err.response.data.error
-      : 'SERVER ERROR!  Please contact the administartor';
+      : 'SERVER ERROR!  Please contact the administartor';
     dispatch({ type: GET_ARTICLES_FAIL, payload: error });
     toast.error(error, { position: toast.POSITION.TOP_CENTER });
   }

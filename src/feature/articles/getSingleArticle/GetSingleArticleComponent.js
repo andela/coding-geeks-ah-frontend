@@ -28,6 +28,7 @@ export class ViewSingleArticle extends Component {
       article: {
         author = {},
         id,
+        slug,
         title,
         description,
         body,
@@ -61,7 +62,10 @@ export class ViewSingleArticle extends Component {
                   .fromNow()}
               </span>
               {'  '}
-              <span className="heading__munite">{readTime}.</span>
+              <span className="heading__munite">
+                {readTime}
+.
+              </span>
               <span>
                 <div className="heading__avarageRating">
                   <AverageRating avarageRatings={averageRatings} />
@@ -73,7 +77,8 @@ export class ViewSingleArticle extends Component {
             <div className="heading__right-item">
               <span className="bookmark">
                 {' '}
-                <img src={bookmark} className="heading__bookmark" alt="" />{' '}
+                <img src={bookmark} className="heading__bookmark" alt="" />
+                {' '}
               </span>
               <span className="menu">
                 <img src={ellipsis} className="heading__menu" alt=" " />
@@ -107,6 +112,7 @@ export class ViewSingleArticle extends Component {
                   likes={likes}
                   dislikes={dislikes}
                   slug={this.props.match.params.slug}
+                  pathname={this.props.location.pathname}
                 />
               </span>
             </div>
@@ -120,6 +126,7 @@ export class ViewSingleArticle extends Component {
                   <StarRating
                     articleId={id}
                     pathname={this.props.location.pathname}
+                    slug={slug}
                   />
                 </span>
               )}
@@ -143,7 +150,14 @@ const mapStateToProps = ({ getSingleArticle, login }) => ({
   currentUser: login,
   isAuthenticated: login
 });
-
+ViewSingleArticle.defaultProps = {
+  location: {
+    pathname: ''
+  },
+  match: {
+    params: ''
+  }
+};
 export default connect(
   mapStateToProps,
   { GetSingleArticle }

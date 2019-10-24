@@ -4,15 +4,15 @@ import { BACKEND_URL } from '../../../app/common/config/appConfig';
 import getSingleArticle from '../getSingleArticle/GetSingleArticleAction';
 import { LIKE_ARTICLE_FAIL, DISLIKE_ARTICLE_FAIL } from '../constants';
 
-const token = localStorage.getItem('token');
-
-const axiosConfig = {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: token
-  }
-};
 export const likeArticle = slug => async dispatch => {
+  const token = localStorage.getItem('token');
+
+  const axiosConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    }
+  };
   try {
     const { data } = await axios.put(
       `${BACKEND_URL}/articles/${slug}/like`,
@@ -31,6 +31,14 @@ export const likeArticle = slug => async dispatch => {
 };
 
 export const dislikeArticle = slug => async dispatch => {
+  const token = localStorage.getItem('token');
+
+  const axiosConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    }
+  };
   try {
     const { data } = await axios.put(
       `${BACKEND_URL}/articles/${slug}/dislike`,

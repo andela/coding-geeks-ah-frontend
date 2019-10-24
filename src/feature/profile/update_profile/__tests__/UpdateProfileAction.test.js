@@ -3,7 +3,10 @@
 import moxios from 'moxios';
 import { makeMockStore } from '../../../../app/common/config/mockStore';
 import { updateUserProfile } from '../UpdateProfileAction';
-import { UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_ERROR } from '../UpdateProfileConstants';
+import {
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_ERROR
+} from '../UpdateProfileConstants';
 
 const store = makeMockStore({ profile: {} });
 const mockSuccess = data => ({ status: 200, response: data });
@@ -34,10 +37,12 @@ describe('Update Profile Action', () => {
         const actionCalled = store.getActions();
         expect(actionCalled[0]).toEqual(expected);
       }
-    } catch (err) { return null; }
+    } catch (err) {
+      return null;
+    }
   });
 
-  it('should dispatch UPDATE_PROFILE_ERROR action', async () => {  
+  it('should dispatch UPDATE_PROFILE_ERROR action', async () => {
     const profileError = { error: 'invalid image' };
     try {
       const profile = {
@@ -59,6 +64,8 @@ describe('Update Profile Action', () => {
         const actionCalled = store.getActions();
         expect(actionCalled[1]).toEqual(expected);
       }
-    } catch (err) { return null; }
+    } catch (err) {
+      return null;
+    }
   });
 });

@@ -41,12 +41,12 @@ describe('Star Rating Test', () => {
   test('Star rating testing error', () => {
     const expected = {
       data: {
-        error: 'Bad request',
-      },
+        error: 'Bad request'
+      }
     };
     moxios.stubRequest(/.*/, {
       status: 400,
-      response: expected,
+      response: expected
     });
     return store.dispatch(starRating()).then(() => {
       expect(store.getActions().length).toEqual(1);
@@ -58,7 +58,7 @@ describe('Star Rating Test', () => {
       request.respondWith({
         status: 200,
         data: {
-          message: 'Something wrong',
+          message: 'Something wrong'
         }
       });
     });

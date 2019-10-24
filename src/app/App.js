@@ -15,7 +15,7 @@ import UpdateProfile from '../feature/profile/update_profile/UpdateProfileCompon
 import ForgotPassword from '../feature/Reset Password/forgot password/ForgotPasswordComponent';
 import ResetPassword from '../feature/Reset Password/reset password/ResetPasswordComponent';
 import Home from '../feature/homePage/Home';
-// import SingleArticle from '../feature/article/getSingleArticle/ReadSingleArticleComponent';
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 toast.configure();
 function App() {
@@ -37,7 +37,6 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/update-profile" component={UpdateProfile} />
           <Route path="/Signup" component={SignUp} />
-          {/* // <Route path="/articles/:slug" component={SingleArticle} /> */}
           <Route path="/articles/:slug" component={GetSingleArticle} />
         </Switch>
       </BrowserRouter>

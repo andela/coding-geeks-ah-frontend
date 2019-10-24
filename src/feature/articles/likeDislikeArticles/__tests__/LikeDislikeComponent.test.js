@@ -1,11 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+import { shallow } from 'enzyme';
 import { LikeDislike } from '../LikeDislikeComponent';
 
-const mockStore = configureStore([thunk]);
 const renderLikesAndDislikes = args => {
   const initialProps = {
     slug: '',
@@ -15,6 +12,9 @@ const renderLikesAndDislikes = args => {
     handleDisike: () => {},
     article: {
       article: {}
+    },
+    history: {
+      push: jest.fn()
     }
   };
   const props = { ...initialProps, ...args };
@@ -33,13 +33,13 @@ describe('Get All Articles Components tests', () => {
   it('Should render a form inputs', () => {
     const wrapper = renderLikesAndDislikes();
     wrapper.setProps({ isAuthenticated: true });
-    const likeArticle = wrapper.find('img');
+    const likeArticle = wrapper.find('.fa');
     likeArticle.at(0).simulate('click');
   });
   it('Should render a form inputs', () => {
     const wrapper = renderLikesAndDislikes();
     wrapper.setProps({ isAuthenticated: true });
-    const dislikeArticle = wrapper.find('img');
+    const dislikeArticle = wrapper.find('.fa');
     dislikeArticle.at(1).simulate('click');
   });
 });
@@ -47,23 +47,14 @@ describe('Get All Articles Components tests', () => {
   it('Should render a form inputs', () => {
     const wrapper = renderLikesAndDislikes();
     wrapper.setProps({ isAuthenticated: false });
-    const likeArticle = wrapper.find('img');
+    const likeArticle = wrapper.find('.fa');
+
     likeArticle.at(0).simulate('click');
   });
   it('Should render a form inputs', () => {
     const wrapper = renderLikesAndDislikes();
     wrapper.setProps({ isAuthenticated: false });
-    const dislikeArticle = wrapper.find('img');
+    const dislikeArticle = wrapper.find('.fa');
     dislikeArticle.at(1).simulate('click');
-  });
-});
-describe('Test MapStateToprops', () => {
-  const initialState = {
-    isAuthenticated: false
-  };
-  const store = mockStore(initialState);
-  const wrapper = mount(<LikeDislike store={store} />);
-  it('Should get IsaAuthenticated to be false', () => {
-    expect(wrapper.props().store.getState().isAuthenticated).toBe(false);
   });
 });

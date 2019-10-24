@@ -1,6 +1,12 @@
 import ProfileReducer from '../ProfileReducers';
-import { RETRIEVE_PROFILE_SUCCESS, RETRIEVE_PROFILE_ERROR } from '../../view_profile/ViewProfileConstants';
-import { UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_ERROR } from '../../update_profile/UpdateProfileConstants';
+import {
+  RETRIEVE_PROFILE_SUCCESS,
+  RETRIEVE_PROFILE_ERROR
+} from '../../view_profile/ViewProfileConstants';
+import {
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_ERROR
+} from '../../update_profile/UpdateProfileConstants';
 
 const initState = { profile: [] };
 
