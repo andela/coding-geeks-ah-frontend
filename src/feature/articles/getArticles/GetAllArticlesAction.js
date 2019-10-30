@@ -9,9 +9,6 @@ const getAllArticles = () => async dispatch => {
       type: LOADING,
       payload: true
     });
-    // const res = await axios.get('http://localhost:4000/api/v1/articles/');
-    // console.log(res);
-
     const res = await axios.get(`${BACKEND_URL}/articles/`);
 
     dispatch({
@@ -21,7 +18,7 @@ const getAllArticles = () => async dispatch => {
   } catch (err) {
     const error = (await err.response)
       ? err.response.data.error
-      : 'SERVER ERROR!  Please contact the administartor';
+      : 'SERVER ERROR!  Please contact the administartor';
     dispatch({ type: GET_ARTICLES_FAIL, payload: error });
     toast.error(error, { position: toast.POSITION.TOP_CENTER });
   }

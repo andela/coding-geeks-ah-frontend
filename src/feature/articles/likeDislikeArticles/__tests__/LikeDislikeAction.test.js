@@ -3,74 +3,118 @@ import { makeMockStore } from '../../../../app/common/config/mockStore';
 import { likeArticle, dislikeArticle } from '../LikeDislikeAction';
 import mockArticle from '../../../../__mocks__/mockData';
 
-import {
-  GET_SINGLE_ARTICLE_SUCCESS,
-  LIKE_ARTICLE_FAIL,
-  DISLIKE_ARTICLE_FAIL
-} from '../../constants';
-
 const store = makeMockStore({ article: {} });
-const mockSuccess = data => ({ status: 200, response: data });
-const mockError = error => ({ status: 400, response: error });
-
 describe('Like Article Action', () => {
   beforeEach(() => moxios.install());
-  afterEach(() => moxios.uninstall());
-  it('Should dispatch LIKE_ARTICLE_FAIL action', async () => {
+  afterEach(() => {
+    moxios.uninstall();
+    store.clearActions();
+  });
+  test('Should dispatch LIKE_ARTICLE_FAIL action', () => {
     const error = 'No articles the moment';
-    const expected = { type: LIKE_ARTICLE_FAIL, error };
-
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
-      request.respondWith(mockError(error));
+      request.respondWith({
+        status: 400,
+        response: {
+          data: {
+            error: 'Unable to like this article'
+          }
+        }
+      });
     });
-    await store.dispatch(likeArticle(error));
-    const dispatchedActions = store.getActions();
-    expect(dispatchedActions[0].type).toEqual(expected.type);
+    const expected = ['LIKE_ARTICLE_FAIL'];
+    return store.dispatch(likeArticle(error)).then(() => {
+      const dispatchedActions = store.getActions();
+      const dispatchedTypes = dispatchedActions.map(action => action.type);
+      expect(dispatchedTypes).toEqual(expected);
+    });
   });
 });
 
 describe('Dislike Article Action', () => {
   beforeEach(() => moxios.install());
-  afterEach(() => moxios.uninstall());
-
+  afterEach(() => {
+    moxios.uninstall();
+    store.clearActions();
+  });
   it('Should dispatch DISLIKE_ARTICLE_FAIL action', async () => {
     const error = 'No articles the moment';
-    const expected = { type: DISLIKE_ARTICLE_FAIL, error };
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
-      request.respondWith(mockError(error));
+      request.respondWith({
+        status: 400,
+        response: {
+          data: {
+            error: 'Unable to like this article'
+          }
+        }
+      });
     });
-    await store.dispatch(dislikeArticle(error));
-    const dispatchedActions = store.getActions();
-    expect(dispatchedActions[1].type).toEqual(expected.type);
+    const expected = ['DISLIKE_ARTICLE_FAIL'];
+    return store.dispatch(dislikeArticle(error)).then(() => {
+      const dispatchedActions = store.getActions();
+      const dispatchedTypes = dispatchedActions.map(action => action.type);
+      expect(dispatchedTypes).toEqual(expected);
+    });
   });
 });
-describe('Dislike Article Action', () => {
+
+describe('Like and Dislike sucess  Article Actions ', () => {
   beforeEach(() => moxios.install());
-  afterEach(() => moxios.uninstall());
-
-  it('Should dispatch DISLIKE_ARTICLE_SUCCESS action', async () => {
-    const expected = GET_SINGLE_ARTICLE_SUCCESS;
-    const slug = 'Should dispatch GET_SINGLE_ARTICLE_SUCCESS-3244';
-
+  afterEach(() => {
+    moxios.uninstall();
+    store.clearActions();
+  });
+  const slug = 'Should dispatch GET_SINGLE_ARTICLE_SUCCESS-3244';
+  it('Should dispatch LIKE_ARTICLE_SUCCESS action', async () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
-      request.respondWith(mockSuccess(mockArticle.article));
+      request.respondWith({
+        status: 200,
+        response: {
+          data: {
+            message: 'You have successfully liked'
+          }
+        }
+      });
     });
-    await store.dispatch(dislikeArticle(slug));
+    const expected = ['LIKE_ARTICLE_SUCCESS'];
+    await store.dispatch(likeArticle(slug));
     const dispatchedActions = store.getActions();
     const dispatchedTypes = dispatchedActions.map(action => action.type);
-    expect(dispatchedTypes[0]).toEqual(expected);
+    expect(dispatchedTypes).toEqual(expected);
+  });
+  it('Should dispatch  DISLIKE_ARTICLE_SUCCESS action', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {
+          data: {
+            article: mockArticle.article
+          }
+        }
+      });
+    });
+    const expected = ['DISLIKE_ARTICLE_SUCCESS'];
+    return store.dispatch(dislikeArticle(slug)).then(() => {
+      const dispatchedActions = store.getActions();
+      const dispatchedTypes = dispatchedActions.map(action => action.type);
+      expect(dispatchedTypes).toEqual(expected);
+    });
   });
 });
 describe('SERVER ERROR', () => {
   it('Should return an error', async () => {
     const slug = 'Should dispatch GET_SINGLE_ARTICLE_SUCCESS-3244';
-    const expected = DISLIKE_ARTICLE_FAIL;
+    const expected = [
+      {
+        payload: 'jwt malformed',
+        type: 'DISLIKE_ARTICLE_FAIL'
+      }
+    ];
     await store.dispatch(dislikeArticle(slug));
-    const dispatchedActions = store.getActions();
-    const dispatchedTypes = dispatchedActions.map(action => action.type);
-    expect(dispatchedTypes[2]).toEqual(expected);
+    expect(store.getActions()).toEqual(expected);
   });
 });

@@ -1,6 +1,3 @@
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, BrowserRouter } from 'react-router-dom';
@@ -16,6 +13,7 @@ import DefaultAvatar from '../../../app/common/images/avatar.png';
 import ellipsis from '../../../app/common/images/ellipsis.png';
 import bookmark from '../../../app/common/images/bookmark.png';
 import ShareArticle from '../shareArticle/ShareArticleComponent';
+import CommentCountComponent from '../../../app/common/CommentCount/CommentCountComponent';
 import './GetSingleArticle.scss';
 
 export class ViewSingleArticle extends Component {
@@ -23,6 +21,7 @@ export class ViewSingleArticle extends Component {
     const { GetSingleArticle } = this.props;
     const { slug } = this.props.match.params;
     GetSingleArticle(slug);
+    window.scrollTo(0, 0);
   }
 
   render() {
@@ -34,11 +33,13 @@ export class ViewSingleArticle extends Component {
         title,
         description,
         body,
+        slug,
         likes,
         dislikes,
         createdAt,
         readTime,
-        averageRatings
+        averageRatings,
+        commentCount
       }
     } = this.props.article;
     const { userName, image } = author;
@@ -73,10 +74,7 @@ export class ViewSingleArticle extends Component {
                   .fromNow()}
               </span>
               {'  '}
-              <span className="heading__munite">
-                {readTime}
-.
-              </span>
+              <span className="heading__munite">{readTime}.</span>
               <span>
                 <div className="heading__avarageRating">
                   <AverageRating avarageRatings={averageRatings} />
@@ -88,8 +86,7 @@ export class ViewSingleArticle extends Component {
             <div className="heading__right-item">
               <span className="bookmark">
                 {' '}
-                <img src={bookmark} className="heading__bookmark" alt="" />
-                {' '}
+                <img src={bookmark} className="heading__bookmark" alt="" />{' '}
               </span>
               <span className="menu">
                 <img src={ellipsis} className="heading__menu" alt=" " />
@@ -113,7 +110,10 @@ export class ViewSingleArticle extends Component {
             <div className="status__comment">
               <BrowserRouter>
                 <Link to="#?" className="status__comment">
-                  4 comments
+                  <CommentCountComponent
+                    className="btn__commentCount"
+                    count={commentCount}
+                  />
                 </Link>
               </BrowserRouter>
             </div>
@@ -123,6 +123,7 @@ export class ViewSingleArticle extends Component {
                   likes={likes}
                   dislikes={dislikes}
                   slug={this.props.match.params.slug}
+                  pathname={this.props.location.pathname}
                 />
               </span>
             </div>
@@ -136,6 +137,7 @@ export class ViewSingleArticle extends Component {
                   <StarRating
                     articleId={id}
                     pathname={this.props.location.pathname}
+                    slug={slug}
                   />
                 </span>
               )}
@@ -157,16 +159,21 @@ export class ViewSingleArticle extends Component {
 const mapStateToProps = ({ getSingleArticle, login }) => ({
   article: getSingleArticle,
   currentUser: login,
-  isAuthenticated: login
+  isAuthenticated: login,
 });
+const mapDispatchToProps = {
+  GetSingleArticle
+};
 
 ViewSingleArticle.defaultProps = {
   location: {
     pathname: ''
+  },
+  match: {
+    params: ''
   }
 };
-
 export default connect(
   mapStateToProps,
-  { GetSingleArticle }
+  mapDispatchToProps
 )(ViewSingleArticle);

@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
         loading: false
       };
     case GET_ARTICLES_FAIL:
-      return { ...state, ...payload };
+      return { ...state, ...payload, loading: false };
     case LOADING:
       return { ...state, ...payload };
     default:

@@ -1,56 +1,49 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { shallow } from 'enzyme';
-import { LikeDislike } from '../LikeDislikeComponent';
+import { shallow, mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import store from '../../../../app/store';
+import LikeDislikeComponent, { LikeDislike } from '../LikeDislikeComponent';
 
-const renderLikesAndDislikes = args => {
-  const initialProps = {
-    slug: '',
-    likeArticle: () => {},
-    dislikeArticle: () => {},
-    handleLike: () => {},
-    handleDisike: () => {},
-    article: {
-      article: {}
-    }
-  };
-  const props = { ...initialProps, ...args };
-  return shallow(<LikeDislike {...props} />);
-};
-
-describe('Get All Articles Components tests', () => {
-  it('Should render a form inputs', () => {
-    const wrapper = renderLikesAndDislikes();
+describe('Like and Dislike Component tests', () => {
+  const likeArticle = jest.fn();
+  const dislikeArticle = jest.fn();
+  const wrapper = shallow(
+    <LikeDislike likeArticle={likeArticle} dislikeArticle={dislikeArticle} />
+  );
+  wrapper.setProps({ isAuthenticated: true });
+  it('Should render Div, Like and Dislike button', () => {
     expect(wrapper.find('.likes').length).toBe(1);
     expect(wrapper.find('.dislikes').length).toBe(1);
     expect(wrapper.find('div').length).toBe(3);
   });
-});
-describe('Get All Articles Components tests', () => {
-  it('Should render a form inputs', () => {
-    const wrapper = renderLikesAndDislikes();
-    wrapper.setProps({ isAuthenticated: true });
-    const likeArticle = wrapper.find('img');
-    likeArticle.at(0).simulate('click');
+  it('Should invoke likeArticle handler', () => {
+    const likeArticleBtn = wrapper.find('.fa').at(0);
+    likeArticleBtn.props().onClick();
+    wrapper.update();
+    expect(likeArticle).toHaveBeenCalledTimes(1);
   });
-  it('Should render a form inputs', () => {
-    const wrapper = renderLikesAndDislikes();
-    wrapper.setProps({ isAuthenticated: true });
-    const dislikeArticle = wrapper.find('img');
-    dislikeArticle.at(1).simulate('click');
+  it('Should invoke dislikeArticle handler', () => {
+    const dislikeArticleBtn = wrapper.find('.fa').at(1);
+    dislikeArticleBtn.props().onClick();
+    wrapper.update();
+    expect(dislikeArticle).toHaveBeenCalledTimes(1);
   });
-});
-describe('Get All Articles Components tests', () => {
-  it('Should render a form inputs', () => {
-    const wrapper = renderLikesAndDislikes();
-    wrapper.setProps({ isAuthenticated: false });
-    const likeArticle = wrapper.find('img');
-    likeArticle.at(0).simulate('click');
-  });
-  it('Should render a form inputs', () => {
-    const wrapper = renderLikesAndDislikes();
-    wrapper.setProps({ isAuthenticated: false });
-    const dislikeArticle = wrapper.find('img');
-    dislikeArticle.at(1).simulate('click');
+
+  const initialState = {
+    isAuthenticated: true
+  };
+  const props = { ...initialState };
+  const connectedWrapper = mount(
+    <Router>
+      <Provider store={store}>
+        <LikeDislikeComponent {...props} />
+      </Provider>
+    </Router>
+  );
+
+  it('should render the component that is connected to the store', () => {
+    expect(connectedWrapper.exists()).toBe(true);
   });
 });

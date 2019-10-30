@@ -14,17 +14,17 @@ const store = mockStore({});
 
 let storage;
 const token = 'Invalid token';
+beforeEach(() => {
+  moxios.install(axios);
+  storage = window.localStorage.setItem('token', token);
+  window.localStorage = new LocalStorage();
+});
+afterEach(() => {
+  moxios.uninstall(axios);
+  store.clearActions();
+  window.localStorage = storage;
+});
 describe('FollowUnfollow ActionCreator', () => {
-  beforeEach(() => {
-    moxios.install(axios);
-    storage = window.localStorage.setItem('token', token);
-    window.localStorage = new LocalStorage();
-  });
-  afterEach(() => {
-    moxios.uninstall(axios);
-    store.clearActions();
-    window.localStorage = storage;
-  });
   it('Follow Author Tests', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
@@ -66,20 +66,7 @@ describe('FollowUnfollow ActionCreator', () => {
       expect(store.getActions().length).toEqual(1);
     });
   });
-});
 
-
-describe('unfollowAuthor', () => {
-  beforeEach(() => {
-    moxios.install(axios);
-    storage = window.localStorage.setItem('token', token);
-    window.localStorage = new LocalStorage();
-  });
-  afterEach(() => {
-    moxios.uninstall(axios);
-    store.clearActions();
-    window.localStorage = storage;
-  });
   it('unfollowAuthor testing success', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
@@ -125,16 +112,6 @@ describe('unfollowAuthor', () => {
 });
 
 describe('getFollowing', () => {
-  beforeEach(() => {
-    moxios.install(axios);
-    storage = window.localStorage.setItem('token', token);
-    window.localStorage = new LocalStorage();
-  });
-  afterEach(() => {
-    moxios.uninstall(axios);
-    store.clearActions();
-    window.localStorage = storage;
-  });
   it('getFollowing testing success ', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();

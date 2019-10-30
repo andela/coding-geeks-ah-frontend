@@ -28,8 +28,10 @@ const renderViewSingleArticle = args => {
 
 describe('Get All Articles Components tests', () => {
   it('Should render a form inputs', () => {
+    window.scrollTo = jest.fn();
     const wrapper = renderViewSingleArticle();
     expect(wrapper.find('div').length).toBe(21);
     expect(wrapper.find('img').length).toBe(3);
+    expect(window.scrollTo).toBeCalledWith(0, 0);
   });
 });

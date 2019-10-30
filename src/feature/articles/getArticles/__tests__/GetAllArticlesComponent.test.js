@@ -16,13 +16,17 @@ const renderGetArtilces = args => {
   const props = { ...initialProps, ...args };
   return shallow(<GetAllArticles {...props} />);
 };
-
+const wrapper = renderGetArtilces();
 describe('Get All Articles Components tests', () => {
+  describe('Test Get All article component', () => {
+    it('Should render FollowUnfollow component', () => {
+      expect(wrapper).toHaveLength(1);
+    });
+  });
   it('Should render a form inputs', () => {
-    const wrapper = renderGetArtilces();
     wrapper.setState({ loading: false });
     expect(wrapper.find('.mainDiv').length).toBe(1);
-    expect(wrapper.find('div').length).toBe(13);
+    expect(wrapper.find('div').length).toBe(16);
     expect(wrapper.find('.link').length).toBe(1);
   });
 });
@@ -35,9 +39,9 @@ describe('Testing Images', () => {
     }
   };
   it('Should return Provided images ', () => {
-    const wrapper = shallow(<GetAllArticles {...initialProps} />);
+    const Wrapper = shallow(<GetAllArticles {...initialProps} />);
     wrapper.setState({ loading: false });
-    expect(wrapper.find('.article__image-box').prop('src')).toEqual(
+    expect(Wrapper.find('.article__image-box').prop('src')).toEqual(
       'http://res.cloudinary.com/jkadhuwa/image/upload/v1570696434/buxtk2bswoki2jhiwtr5.png'
     );
   });
@@ -48,8 +52,8 @@ describe('Return no articles', () => {
     getAllArticles: () => {}
   };
   it('Should return default images if images are not provided', () => {
-    const wrapper = shallow(<GetAllArticles {...initialProps} />);
-    expect(wrapper.find('.link').length).toBe(0);
+    const Wrapper = shallow(<GetAllArticles {...initialProps} />);
+    expect(Wrapper.find('.link').length).toBe(0);
   });
 });
 describe('Return article with default image', () => {
@@ -58,9 +62,9 @@ describe('Return article with default image', () => {
     getAllArticles: () => {}
   };
   it('Should return default images if images are not provided', () => {
-    const wrapper = shallow(<GetAllArticles {...initialProps} />);
-    wrapper.setState({ loading: false });
-    expect(wrapper.find('.article__image-box').prop('src')).toEqual(
+    const Wrapper = shallow(<GetAllArticles {...initialProps} />);
+    Wrapper.setState({ loading: false });
+    expect(Wrapper.find('.article__image-box').prop('src')).toEqual(
       'defaultImage.png'
     );
   });

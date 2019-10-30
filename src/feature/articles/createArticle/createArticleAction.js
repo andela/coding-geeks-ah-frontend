@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { CREATE_ARTICLE_SUCCESS, CREATE_ARTICLE_FAIL } from '../constants';
 import { BACKEND_URL } from '../../../app/common/config/appConfig';
+import setAxiosConfig from '../../../app/common/config/axiosConfig';
 
 config();
 
@@ -10,13 +11,6 @@ const createArticle = (
   { title, description, tags, category, body },
   props
 ) => async dispatch => {
-  const token = localStorage.getItem('token');
-  const axiosConfig = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: token
-    }
-  };
   let formData = {};
   formData.tags = tags || '';
   formData.category = category || '';
@@ -31,7 +25,7 @@ const createArticle = (
     const res = await axios.post(
       `${BACKEND_URL}/articles/`,
       formData,
-      axiosConfig
+      setAxiosConfig()
     );
     dispatch({
       type: CREATE_ARTICLE_SUCCESS,

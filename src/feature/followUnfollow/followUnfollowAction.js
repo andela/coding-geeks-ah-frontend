@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import axiosConfig from '../../app/common/config/axiosConfig';
+import setAxiosConfig from '../../app/common/config/axiosConfig';
 import {
   CLEAR_FOLLOW,
   FOLLOW_AUTHOR_SUCCESS,
@@ -18,9 +18,9 @@ export const clearFollowing = () => (dispatch) => dispatch({ type: CLEAR_FOLLOW 
 export const getFollowing = () => async (dispatch) => {
   try {
     const { token, username } = localStorage;
-    const headers = { ...axiosConfig.headers, Authorization: token };
+    const headers = { ...setAxiosConfig.headers, Authorization: token };
     const res = await axios.get(
-      `${BACKEND_URL}/profiles/${username}/following`, { ...axiosConfig, headers }
+      `${BACKEND_URL}/profiles/${username}/following`, { ...setAxiosConfig, headers }
     );
 
     dispatch({

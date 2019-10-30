@@ -1,6 +1,7 @@
 .wrapper {
   width: 80%;
-  margin: 20px auto;
+  margin: 0 auto;
+  margin-bottom: 2em !important;
   padding: 5px 30px;
   background: #f8f8f8;
 }
@@ -29,19 +30,13 @@
     color: black;
     font-weight: bold;
     font-size: 18px;
-    position: relative;
-    top: 0.5em;
   }
   &__munite {
     font-size: 13px;
     margin-left: 10px;
-    position: relative;
-    top: 1.5em;
   }
   &__avarageRating {
     margin-left: 2.5em;
-    position: relative;
-    top: 1.5em;
   }
   &__right-item {
     float: right;

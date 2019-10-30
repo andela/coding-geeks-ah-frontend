@@ -1,11 +1,10 @@
-/* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import createArticle from './createArticleAction';
-import editorConfigs from '../../../app/config/ckeditorConfig';
+import editorConfigs from '../../../app/common/config/ckeditorConfig';
 import 'react-toastify/dist/ReactToastify.css';
 import './createArticle.scss';
 
