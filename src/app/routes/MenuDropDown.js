@@ -22,7 +22,7 @@ const MenuDropDown = (props) => {
             Create article
           </li>
         </a>
-        <a href="/Create">
+        <a href="/bookmarks">
           <li>
             Bookmarks
           </li>
