@@ -6,7 +6,7 @@
         padding-left: 5%;
         margin-left: 5%;
         width: 70%;
-        height: 10%;
+        height: 15%;
         border: 1px solid rgba(0, 0, 0, 0.068);
         background: rgba(231, 229, 229, 0.562);
         box-shadow: rgb(1, 138, 192);
@@ -15,6 +15,13 @@
         text-decoration: none;
         color: black;
     }
+}
+.bookmark-loader{
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+    position: absolute;
+    margin: 20% 0 0 45%;
 }
 .bookmark-button{
     background: rgba(4, 106, 189, 0.959);
@@ -27,8 +34,14 @@
     margin-top: -3.7%;
     cursor: pointer;
 }
+hr{
+    width: 80%;
+    margin-left: -0.5%;
+    font-weight: bolder 5px;
+}
 .bookmark__error{
     text-align: center;
+    margin: 10%;
 }
 
 .bookmarks-header{
@@ -40,6 +53,7 @@
         margin-left:none;
         margin-bottom: none;
         .bookmarks__card{
+            // margin-bottom: -20px;
             padding-bottom: 0;
             padding-left: 2;
             margin-left: -11%;
@@ -75,6 +89,8 @@
         margin-left:none;
         margin-bottom: none;
         .bookmarks__card{
+            // margin-bottom: -20px;
+            padding-top: 50px;
             padding-bottom: 0;
             padding-left: 2;
             margin-left: -11%;
@@ -85,9 +101,13 @@
         }
         h3{
             font-size: 1rem;
+            position: relative;
+            bottom: 50px;
         }
         p{
             font-size: 0.9rem;
+            position: relative;
+            bottom: 50px;
         }
     }
     .bookmark-button{
@@ -95,7 +115,7 @@
         height: 1.3rem;
         border-radius: 0.4rem;
         margin-right: 9%;
-        margin-top: -3%;
+        margin-top: -4%;
         cursor: pointer;
     }
     .bookmarks-header{
@@ -110,13 +130,14 @@
         margin-left:none;
         margin-bottom: none;
         .bookmarks__card{
-            padding-bottom: 0;
+            margin-bottom: -20px;
             padding-left: 2;
             margin-left: -11%;
             width: 100%;
-            height: 100%;
+            // height: 100px;
             border: 1px solid rgba(0, 0, 0, 0.068);
             background: rgba(231, 229, 229, 0.562);
+            // border: red 2px solid;
         }
         h3{
             font-size: 1rem;
@@ -130,7 +151,7 @@
         height: 1.5rem;
         border-radius: 0.4rem;
         margin-right: 8%;
-        margin-top: -2.5%;
+        margin-top: -1%;
         cursor: pointer;
     }
     .bookmarks-header{
@@ -145,7 +166,7 @@
     margin-left:14%;
     margin-bottom: 3%;
     .bookmarks__card{
-        padding-bottom: 4%;
+        margin-bottom: -20px;
         padding-left: 5%;
         margin-left: 5%;
         width: 70%;
@@ -167,7 +188,7 @@
     border-radius: 0.5rem;
     float: right;
     margin-right: 22%;
-    margin-top: -3.7%;
+    margin-top: -1.7%;
     cursor: pointer;
 }
 
@@ -182,7 +203,7 @@
         margin-left:none;
         margin-bottom: none;
         .bookmarks__card{
-            padding-bottom: 0;
+            // margin-bottom: -20px;
             padding-left: 2;
             margin-left: -11%;
             width: 100%;
@@ -202,7 +223,7 @@
         height: 1.3rem;
         border-radius: 0.4rem;
         margin-right: 9%;
-        margin-top: -9%;
+        margin-top: -8%;
         cursor: pointer;
     }
     .bookmarks-header{

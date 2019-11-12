@@ -16,7 +16,7 @@ import ForgotPassword from '../feature/Reset Password/forgot password/ForgotPass
 import ResetPassword from '../feature/Reset Password/reset password/ResetPasswordComponent';
 import UpdateArticle from '../feature/articles/updateArticle/UpdateArticleComponent';
 import Search from '../feature/articles/SearchArticle/SearchComponent';
-import Bookmarks from '../feature/bookmark/Bookmarks';
+import Bookmarks from '../feature/bookmark/BookmarksListComponent';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 toast.configure();

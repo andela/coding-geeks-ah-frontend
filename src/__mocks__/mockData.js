@@ -111,5 +111,17 @@ export default {
       updatedAt: '2019-10-24T09:01:56.240Z',
       createdAt: '2019-10-24T09:01:56.240Z'
     }
-  }
+  },
+  bookmarks: [{
+    id: 232,
+    articleId: 7,
+    userId: 10,
+    createdAt: '2019-11-13T08:49:16.032Z',
+    updatedAt: '2019-11-13T08:49:16.032Z',
+    Article: {
+      slug: 'rwanda-at-a-glance-2lk2vrwhaz',
+      title: 'Rwanda at a glance',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry'
+    }
+  }]
 };
