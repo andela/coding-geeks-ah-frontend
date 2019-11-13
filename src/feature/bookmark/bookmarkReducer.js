@@ -3,7 +3,8 @@ import {
   BOOKMARK_FAIL,
   UNBOOKMARK_SUCCESS,
   UNBOOKMARK_FAIL,
-  GET_BOOKMARKS_SUCCESS
+  GET_BOOKMARKS_SUCCESS,
+  GET_BOOKMARKS_FAIL,
 } from './bookmarkTypes';
 
 export const initialState = {
@@ -21,7 +22,8 @@ const bookmarkReducers = (state = initialState, action) => {
     };
     case BOOKMARK_SUCCESS: return {
       ...state,
-      payload
+      payload,
+      loading: false
     };
     case BOOKMARK_FAIL: return {
       ...state,
@@ -35,6 +37,9 @@ const bookmarkReducers = (state = initialState, action) => {
     case UNBOOKMARK_FAIL: return {
       ...state,
       payload
+    };
+    case GET_BOOKMARKS_FAIL: return {
+      bookmarks: []
     };
     default: return state;
   }

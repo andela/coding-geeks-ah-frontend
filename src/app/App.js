@@ -16,6 +16,7 @@ import ForgotPassword from '../feature/Reset Password/forgot password/ForgotPass
 import ResetPassword from '../feature/Reset Password/reset password/ResetPasswordComponent';
 import UpdateArticle from '../feature/articles/updateArticle/UpdateArticleComponent';
 import Search from '../feature/articles/SearchArticle/SearchComponent';
+import Bookmarks from '../feature/bookmark/BookmarksListComponent';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 toast.configure();
@@ -40,6 +41,7 @@ function App() {
             <Route path="/profile" component={Profile} />
             <Route path="/update-profile" component={UpdateProfile} />
             <Route exact path="/articles/:slug" component={GetSingleArticle} />
+            <Route path="/bookmarks" component={Bookmarks} />
             <ProtectedRoutes path="/create" component={CreateArticle} />
             <ProtectedRoutes path="/article/:slug/update" component={UpdateArticle} />
             <Route path="/search" component={Search} />

@@ -5,7 +5,8 @@ import {
   BOOKMARK_FAIL,
   UNBOOKMARK_SUCCESS,
   UNBOOKMARK_FAIL,
-  GET_BOOKMARKS_SUCCESS
+  GET_BOOKMARKS_SUCCESS,
+  GET_BOOKMARKS_FAIL
 } from '../bookmarkTypes';
 
 describe('BOOKMARK REDUCER', () => {
@@ -54,6 +55,13 @@ describe('GET_BOOKMARKS', () => {
   test('GET_BOOKMARKS_SUCCESS', () => {
     const reducer = followReducers(initialState, {
       type: GET_BOOKMARKS_SUCCESS,
+      payload: {}
+    });
+    expect(reducer).toHaveProperty('bookmarks');
+  });
+  test('GET_BOOKMARKS_FAIL', () => {
+    const reducer = followReducers(initialState, {
+      type: GET_BOOKMARKS_FAIL,
       payload: {}
     });
     expect(reducer).toHaveProperty('bookmarks');
