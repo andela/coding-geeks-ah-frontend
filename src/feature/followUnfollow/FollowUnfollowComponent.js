@@ -23,7 +23,7 @@ export class FollowUnfollowComponent extends Component {
   UNSAFE_componentWillMount = () => {
     const { props } = this;
     return localStorage.token
-      ? props.getFollowing()
+      ? props.getFollowing(localStorage.username)
       : this.setState(prevState => ({ ...prevState, buttonState: 'Follow' }));
   }
 
