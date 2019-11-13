@@ -27,7 +27,7 @@ describe('Get All Articles Components tests', () => {
     wrapper.setState({ loading: false });
     expect(wrapper.find('.mainDiv').length).toBe(1);
     expect(wrapper.find('div').length).toBe(17);
-    expect(wrapper.find('.link').length).toBe(1);
+    expect(wrapper.find('.link').length).toBe(5);
   });
 });
 describe('Testing Images', () => {

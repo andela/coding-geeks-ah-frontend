@@ -16,7 +16,7 @@ export class GetAllArticles extends Component {
   constructor() {
     super();
     this.state = {
-      activePage: 1,
+      activePage: 1
     };
   }
 
@@ -34,9 +34,7 @@ export class GetAllArticles extends Component {
         <div className="main--banner">
           <div className="main--banner__text">
             <h1 className="heading__3">
-              Authors
-              {' '}
-              <br />
+              Authors <br />
               Haven
             </h1>
             <h3 className="heading__4">Create and Read Articles</h3>
@@ -50,12 +48,12 @@ export class GetAllArticles extends Component {
           <div className="main-content">
             {articles.length !== 0 ? (
               articles.map(article => (
-                <Link
-                  to={`/articles/${article.slug}`}
-                  key={article.slug}
-                  className="link"
-                >
-                  <div className="article article-main--wrapper">
+                <div className="article article-main--wrapper">
+                  <Link
+                    to={`/articles/${article.slug}`}
+                    className="link_image"
+                    key={article.id}
+                  >
                     <div className="article__image">
                       <img
                         className="article__image-box"
@@ -67,8 +65,13 @@ export class GetAllArticles extends Component {
                         alt=""
                       />
                     </div>
-                    <div className="body-wrapper article__content">
-                      <div className="user--wrapper">
+                  </Link>
+                  <div className="body-wrapper article__content">
+                    <div className="user--wrapper">
+                      <Link
+                        to={`/profile/${article.author.userName}`}
+                        className="link"
+                      >
                         <div className="user__avatar">
                           <img
                             className={
@@ -82,46 +85,56 @@ export class GetAllArticles extends Component {
                             alt="user"
                           />
                         </div>
-                        <div className="user__name">
+                      </Link>
+
+                      <div className="user__name">
+                        <Link
+                          to={`/profile/${article.author.userName}`}
+                          className="link"
+                        >
                           {article.author.userName}
+                        </Link>
+                      </div>
+                      <div className="article-time">
+                        <div className="article__timePublished">
+                          {momemt(article.createdAt)
+                            .startOf('hour')
+                            .fromNow()}
                         </div>
-                        <div className="article-time">
-                          <div className="article__timePublished">
-                            {momemt(article.createdAt)
-                              .startOf('hour')
-                              .fromNow()}
-                          </div>
-                          <div className="article__readTime">
-                            {article.readTime}
-                          </div>
+                        <div className="article__readTime">
+                          {article.readTime}
                         </div>
                       </div>
+                    </div>
+                    <Link to={`/articles/${article.slug}`} className="link">
                       <div className="article--wrapper">
                         <div className="article__title">{article.title}</div>
                         <div className="article__description">
                           {article.description}
                         </div>
                       </div>
-                      <hr className="divider" />
+                    </Link>
+                    <hr className="divider" />
+                    <Link to={`/articles/${article.slug}`} className="link">
                       <CommentCountComponent
                         className="btn__commentCount"
                         count={article.commentCount}
                       />
-
+                    </Link>
+                    <Link to={`/articles/${article.slug}`} className="link">
                       <LikeDilsikeArticle
                         className="disabled btn__likesDislikes"
                         likes={article.likes}
                         dislikes={article.dislikes}
                       />
-                    </div>
+                    </Link>
                   </div>
-                </Link>
+                </div>
               ))
             ) : (
               <div className="article__error">
                 <h2>
                   Sorry No Articles Found At The Moment.
-                  {' '}
                   <br />
                   Please Create one or comeback later!!!
                 </h2>
@@ -148,7 +161,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getAllArticles
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GetAllArticles);
+export default connect(mapStateToProps, mapDispatchToProps)(GetAllArticles);

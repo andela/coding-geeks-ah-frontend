@@ -3,7 +3,7 @@
   margin: 0 auto;
   margin-bottom: 2em !important;
   padding: 5px 30px;
-  background:rgb(248, 248, 248);
+  background: rgb(248, 248, 248);
 }
 .heading {
   display: flex;
@@ -11,6 +11,10 @@
   text-align: center;
   > div {
     width: 50%;
+  }
+  .link {
+    text-decoration: none;
+    color: black;
   }
   &__image {
     float: left;
@@ -128,7 +132,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .wrapper-commenting{
+  .wrapper-commenting {
     width: 100% !important;
   }
   .heading {

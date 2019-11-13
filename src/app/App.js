@@ -38,7 +38,7 @@ function App() {
             <Route exact path="/" component={GetAllArticles} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
-            <Route path="/profile" component={Profile} />
+            <Route exact path="/profile/:userName" component={Profile} />
             <Route path="/update-profile" component={UpdateProfile} />
             <Route exact path="/articles/:slug" component={GetSingleArticle} />
             <Route path="/bookmarks" component={Bookmarks} />

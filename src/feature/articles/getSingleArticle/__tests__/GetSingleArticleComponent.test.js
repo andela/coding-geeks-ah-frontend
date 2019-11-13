@@ -31,7 +31,7 @@ const renderViewSingleArticle = args => {
     },
     history: {
       push: jest.fn()
-    }
+    },
   };
   const props = { ...initialProps, ...args };
   const match = { params: { slug: 'kenya moja films99494' } };
@@ -42,6 +42,7 @@ describe('Get Single Article Components tests', () => {
   it('Should render a form inputs', () => {
     window.scrollTo = jest.fn();
     const wrapper = renderViewSingleArticle();
+    wrapper.setProps({ loading: false });
     expect(wrapper.find('div').length).toBe(22);
     expect(wrapper.find('img').length).toBe(2);
     expect(window.scrollTo).toBeCalledWith(0, 0);
