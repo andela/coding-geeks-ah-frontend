@@ -8,6 +8,7 @@ import visitedProfile from '../viewVisitedProfile/ViewVisitedProfileAction';
 import './ViewProfileStyle.scss';
 import notFound from '../img/no-image.jpeg';
 import { UpdateProfileComponent } from '../update_profile/UpdateProfileComponent';
+import UserArticlesComponent from '../userArticles/userArticlesComponent';
 
 export class ViewProfileComponent extends Component {
   constructor(props) {
@@ -37,7 +38,12 @@ export class ViewProfileComponent extends Component {
   };
 
   render() {
-    const { authenticated, updateProfile, visitedUserProfile } = this.props;
+    const {
+      authenticated,
+      updateProfile,
+      visitedUserProfile,
+      history,
+    } = this.props;
 
     const { show } = this.state;
     let image;
@@ -82,6 +88,11 @@ export class ViewProfileComponent extends Component {
             bio={bio}
           />
         </div>
+        <div>
+          <UserArticlesComponent
+            history={history}
+          />
+        </div>
       </div>
     ) : (
       <p className="grid-container__loading">Loading...</p>
@@ -102,8 +113,8 @@ export const mapDispatchToProps = dispatch => ({
   getVisitedProfile: user => {
     dispatch(visitedProfile(user));
   },
-  updateProfile: (user, profile, closeModal) =>
-    dispatch(updateUserProfile(user, profile, closeModal))
+  updateProfile:
+  (user, profile, closeModal) => dispatch(updateUserProfile(user, profile, closeModal))
 });
 
 export default connect(

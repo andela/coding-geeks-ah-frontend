@@ -124,12 +124,12 @@ export class Comment extends Component {
       commentBtn,
       commentId
     } = this.state;
-    const { slug } = this.props;
+    const { slug, user } = this.props;
     if (commentBtn === 'Comment') {
       this.props.publish(input, slug);
       this.setState({
         isEditing: false,
-        display: true,
+        display: user,
       });
       this.inputRef.current.value = '';
     } else {
@@ -242,9 +242,9 @@ export class Comment extends Component {
                             type="button"
                             className="comments-thread__wrapper__fetch__div__commentator__username"
                           >
-                            {this.state.display
-                              ? user
-                              : comment.Commenter.userName}
+                            {comment.Commenter.userName
+                              ? comment.Commenter.userName
+                              : user}
                           </button>
                           <span className="comments-thread__wrapper__fetch__div__commentator__time">
                             {

@@ -65,8 +65,7 @@ export const fetchComments = (articleSlug, page, limit) => async (dispatch) => {
       .get(`${BACKEND_URL}/articles/${articleSlug}/comments?page=${p}&limit=${l}`);
     const { data } = res;
     const comments = data.data;
-    if (comments && (p < data.pages)) {
-      dispatch(hasMore(true));
+    if (comments && (p <= data.pages)) {
       dispatch(commentFetchSuccess(comments));
     } else {
       dispatch(hasMore(false));
