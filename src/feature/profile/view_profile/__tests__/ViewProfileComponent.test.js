@@ -9,15 +9,15 @@ const renderProfile = () => {
     bio: {},
     image: {},
     getProfile: jest.fn(),
+    getVisitedProfile: jest.fn(),
     authenticated: {
       username: 'someone'
     },
-    profile: {
-      profile: {
-        image: 'someone',
-        bio: 'someone',
-        userName: 'someone'
-      }
+    visitedUserProfile: {
+      userName: 'someone'
+    },
+    match: {
+      params: { userName: 'someone' }
     }
   };
   const props = { ...initialProps };

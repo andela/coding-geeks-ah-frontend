@@ -10,6 +10,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import momemt from 'moment';
 import ReactHtmlParser from 'react-html-parser';
 import GetSingleArticle from './GetSingleArticleAction';
@@ -27,7 +28,9 @@ import deleteArticle from '../deleteArticle/DeleteAction';
 import CommentComponent from '../../comment/CommentComponent';
 import BookmarkComponent from '../../bookmark/BookmarkComponent';
 import {
-  getBookmarks, bookmarking, unbookmark
+  getBookmarks,
+  bookmarking,
+  unbookmark
 } from '../../bookmark/bookmarkAction';
 import Tags from '../displayTags/TagsComponent';
 import './GetSingleArticle.scss';
@@ -43,17 +46,20 @@ export class ViewSingleArticle extends Component {
     };
   }
 
-  UNSAFE_componentWillReceiveProps = (nextProps) => {
+  UNSAFE_componentWillReceiveProps = nextProps => {
     const { articleId } = this.state;
     const { bookmarks, article } = nextProps;
     this.setState(prevState => ({
       ...prevState,
       bookmarks: bookmarks || prevState.bookmarks,
-      isArticleBookmarked: (bookmarks || prevState.bookmarks)
-        .filter((bookmark) => Number(bookmark.articleId) === Number(articleId))[0],
-      articleId: (article && article.article && article.article.id) || prevState.articleId
+      isArticleBookmarked: (bookmarks || prevState.bookmarks).filter(
+        bookmark => Number(bookmark.articleId) === Number(articleId)
+      )[0],
+      articleId:
+        (article && article.article && article.article.id) ||
+        prevState.articleId
     }));
-  }
+  };
 
   componentDidMount() {
     const { GetSingleArticle, getBookmarks } = this.props;
@@ -67,12 +73,10 @@ export class ViewSingleArticle extends Component {
   }
 
   submitBookmark = () => {
-    const {
-      isAuthenticated
-    } = this.props;
+    const { isAuthenticated } = this.props;
 
     return isAuthenticated.isAuthenticated;
-  }
+  };
 
   handleBookmarkClick = (isBookmarked, articleId) => {
     const { location, history } = this.props;
@@ -82,7 +86,7 @@ export class ViewSingleArticle extends Component {
     const { slug } = this.props.match.params;
     const { bookmarking, unbookmark } = this.props;
     return !isBookmarked ? bookmarking(slug) : unbookmark(slug, articleId);
-  }
+  };
 
   componentDidUpdate() {
     const { deleted } = this.props;
@@ -122,7 +126,8 @@ export class ViewSingleArticle extends Component {
         tagList
       },
       currentUser: { user },
-      bookmarkLoading
+      bookmarkLoading,
+      loading
     } = this.props;
     const { history, location } = this.props;
     const username = localStorage.getItem('username');
@@ -132,137 +137,153 @@ export class ViewSingleArticle extends Component {
 
     return (
       <div className="wrapper-commenting">
-        <div className="heading">
-          <div className="heading__left">
-            <span>
-              <div className="heading__follow">
-                <FollowUnfollowComponent
-                  authorId={authorId}
-                  username={userName}
-                  pathname={this.props.location.pathname}
-                />
-              </div>
-            </span>
-            <div className="heading__image">
-              <img
-                src={image || DefaultAvatar}
-                className="heading__img"
-                alt="user"
-              />
-            </div>
-            <div className="heading__user">
-              <span className="heading__name">{userName}</span>
-              <br />
-              <span className="heading__munite">
-                {momemt(createdAt)
-                  .startOf('hour')
-                  .fromNow()}
-              </span>
-              {'  '}
-              <span className="heading__munite">
-                {readTime}
-              </span>
-              <span>
-                <div className="heading__avarageRating">
-                  <AverageRating avarageRatings={averageRatings} />
-                </div>
-              </span>
-            </div>
-          </div>
-          <div className="heading__right">
-            <div className="heading__right-item">
-              <div className="menu">
-                <BookmarkComponent
-                  isAuthenticated={this.props.isAuthenticated.isAuthenticated}
-                  loading={bookmarkLoading}
-                  articleId={id}
-                  bookmarks={bookmarks}
-                  onClick={this.handleBookmarkClick}
-                  pathname={this.props.location.pathname}
-                  className="bookmarkIcon"
-                />
+        {loading ? (
+          <span className="loader">LOADING...</span>
+        ) : (
+          <>
+            <div className="heading">
+              <div className="heading__left">
                 <span>
-                  {username === userName || !username ? (
-                    <img
-                      src={ellipsis}
-                      className="heading__menu"
-                      alt=" "
-                      onClick={this.displayMenu}
+                  <div className="heading__follow">
+                    <FollowUnfollowComponent
+                      authorId={authorId}
+                      username={userName}
+                      pathname={this.props.location.pathname}
                     />
-                  ) : (
-                    ''
-                  )}
+                  </div>
                 </span>
-                {displayMenu ? (
-                  <ArticleMenuDropdown
-                    slug={slug}
-                    pathname={this.props.location.pathname}
-                  />
-                ) : (
-                  ''
-                )}
+                <Link
+                  to={`/profile/${userName}`}
+                  key={userName}
+                  className="link"
+                >
+                  <div className="heading__image">
+                    <img
+                      src={image || DefaultAvatar}
+                      className="heading__img"
+                      alt="user"
+                    />
+                  </div>
+                </Link>
+                <div className="heading__user">
+                  <Link
+                    to={`/profile/${userName}`}
+                    key={userName}
+                    className="link"
+                  >
+                    <span className="heading__name">{userName}</span>
+                  </Link>
+                  <br />
+                  <span className="heading__munite">
+                    {momemt(createdAt)
+                      .startOf('hour')
+                      .fromNow()}
+                  </span>
+                  {'  '}
+                  <span className="heading__munite">{readTime}</span>
+                  <span>
+                    <div className="heading__avarageRating">
+                      <AverageRating avarageRatings={averageRatings} />
+                    </div>
+                  </span>
+                </div>
+              </div>
+              <div className="heading__right">
+                <div className="heading__right-item">
+                  <div className="menu">
+                    <BookmarkComponent
+                      isAuthenticated={this.props.isAuthenticated.isAuthenticated}
+                      loading={bookmarkLoading}
+                      articleId={id}
+                      bookmarks={bookmarks}
+                      onClick={this.handleBookmarkClick}
+                      pathname={this.props.location.pathname}
+                      className="bookmarkIcon"
+                    />
+                    <span>
+                      {username === userName || !username ? (
+                        <img
+                          src={ellipsis}
+                          className="heading__menu"
+                          alt=" "
+                          onClick={this.displayMenu}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </span>
+                    {displayMenu ? (
+                      <ArticleMenuDropdown
+                        slug={slug}
+                        pathname={this.props.location.pathname}
+                      />
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="body">
-          <div className="body__title">
-            <h2>{title}</h2>
-          </div>
-          <div className="body__description">
-            <p className="body__description-content">{description}</p>
-          </div>
-          <div className="body__article-body">{ReactHtmlParser(body)}</div>
-          <hr />
-          <div className="status">
-            <div className="status__stats">
-              <span>7 reads</span>
-            </div>
-            <div className="status__comment">
-              <CommentCountComponent
-                className="btn__commentCount"
-                count={commentCount}
+            <div className="body">
+              <div className="body__title">
+                <h2>{title}</h2>
+              </div>
+              <div className="body__description">
+                <p className="body__description-content">{description}</p>
+              </div>
+              <div className="body__article-body">{ReactHtmlParser(body)}</div>
+              <hr />
+              <div className="status">
+                <div className="status__stats">
+                  <span>7 reads</span>
+                </div>
+                <div className="status__comment">
+                  <CommentCountComponent
+                    className="btn__commentCount"
+                    count={commentCount}
+                  />
+                </div>
+                <div className="status__like">
+                  <span>
+                    <LikeDislikeArticle
+                      likes={likes}
+                      dislikes={dislikes}
+                      slug={this.props.match.params.slug}
+                      pathname={this.props.location.pathname}
+                    />
+                  </span>
+                </div>
+                <div className="status__rate">
+                  {ownArticle ? (
+                    <span className="status__rate">
+                      <DisabledStar />
+                    </span>
+                  ) : (
+                    <span className="status__rate">
+                      <StarRating
+                        articleId={id}
+                        pathname={this.props.location.pathname}
+                      />
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="tags-share-container">
+                <div className="tags">
+                  <Tags tags={tagList} />
+                </div>
+                <div className="share-buttons">
+                  <ShareArticle />
+                </div>
+              </div>
+              <CommentComponent
+                slug={this.props.match.params.slug}
+                history={history}
+                location={location}
               />
             </div>
-            <div className="status__like">
-              <span>
-                <LikeDislikeArticle
-                  likes={likes}
-                  dislikes={dislikes}
-                  slug={this.props.match.params.slug}
-                  pathname={this.props.location.pathname}
-                />
-              </span>
-            </div>
-            <div className="status__rate">
-              {ownArticle ? (
-                <span className="status__rate">
-                  <DisabledStar />
-                </span>
-              ) : (
-                <span className="status__rate">
-                  <StarRating
-                    articleId={id}
-                    pathname={this.props.location.pathname}
-                  />
-                </span>
-              )}
-            </div>
-          </div>
-          <div className="tags-share-container">
-            <div className="tags">
-              <Tags tags={tagList} />
-            </div>
-            <div className="share-buttons">
-              <ShareArticle />
-            </div>
-          </div>
-          <CommentComponent
-            slug={this.props.match.params.slug}
-            history={history}
-            location={location}
-          />
-        </div>
+          </>
+        )}
       </div>
     );
   }
@@ -273,6 +294,7 @@ const mapStateToProps = ({ getSingleArticle, login, bookmarking }) => ({
   isAuthenticated: login,
   deleted: getSingleArticle.deleted,
   bookmarks: bookmarking.bookmarks,
+  loading: getSingleArticle.loading,
   bookmarkLoading: bookmarking.loading
 });
 
@@ -290,6 +312,4 @@ ViewSingleArticle.defaultProps = {
   }
 };
 
-export default connect(
-  mapStateToProps, mapDispatchToProps
-)(ViewSingleArticle);
+export default connect(mapStateToProps, mapDispatchToProps)(ViewSingleArticle);

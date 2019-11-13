@@ -1,6 +1,12 @@
 import ProfileReducer from '../ProfileReducers';
-import { RETRIEVE_PROFILE_SUCCESS, RETRIEVE_PROFILE_ERROR } from '../../view_profile/ViewProfileConstants';
-import { UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_ERROR } from '../../update_profile/UpdateProfileConstants';
+import {
+  RETRIEVE_PROFILE_SUCCESS,
+  RETRIEVE_PROFILE_ERROR
+} from '../../view_profile/ViewProfileConstants';
+import {
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_ERROR
+} from '../../update_profile/UpdateProfileConstants';
 
 const initState = { profile: [] };
 
@@ -53,7 +59,7 @@ const updateProfileFailureAction = {
 describe('Profile Reducer Tests', () => {
   it('should return an empty state', () => {
     const defaultState = ProfileReducer(undefined, {});
-    expect(defaultState).toEqual({ profile: [] });
+    expect(defaultState).toEqual({ profile: [], visitedProfile: [] });
   });
 
   it('should return a profile from retrieve profile success action', () => {

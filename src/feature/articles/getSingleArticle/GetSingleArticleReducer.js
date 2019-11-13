@@ -14,7 +14,8 @@ import {
 export const initialState = {
   article: {},
   deleted: false,
-  updated: false
+  updated: false,
+  loading: true
 };
 
 export default (state = initialState, action) => {
@@ -25,7 +26,8 @@ export default (state = initialState, action) => {
     case GET_SINGLE_ARTICLE_SUCCESS:
       return {
         ...state,
-        ...payload
+        ...payload,
+        loading: false
       };
     case DELETE_ARTICLE_SUCCESS:
       return {
