@@ -56,8 +56,8 @@ export class ViewSingleArticle extends Component {
         bookmark => Number(bookmark.articleId) === Number(articleId)
       )[0],
       articleId:
-        (article && article.article && article.article.id) ||
-        prevState.articleId
+        (article && article.article && article.article.id)
+        || prevState.articleId
     }));
   };
 
@@ -262,6 +262,7 @@ export class ViewSingleArticle extends Component {
                     <span className="status__rate">
                       <StarRating
                         articleId={id}
+                        slug={slug}
                         pathname={this.props.location.pathname}
                       />
                     </span>
