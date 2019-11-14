@@ -28,6 +28,7 @@ export class Navbar extends Component {
 
   componentDidMount() {
     this.currentUserProfile();
+    this.hundleSocialAuth();
   }
 
   componentDidUpdate(prevProps) {
@@ -56,6 +57,17 @@ export class Navbar extends Component {
     return isAuthenticated ? retrieveProfile(username) : null;
   };
 
+  hundleSocialAuth = () => {
+    const { search } = window.location;
+    if (search) {
+      if (search.includes('token')) {
+        const token = search.replace('?token=', '');
+        this.props.authUser(token);
+        this.redirectURL();
+      }
+    }
+  }
+
   redirectURL = () => {
     window.location.replace('/');
   };
@@ -67,15 +79,6 @@ export class Navbar extends Component {
   }
 
   render() {
-    const { search } = window.location;
-    if (search) {
-      if (search.includes('token')) {
-        const token = search.replace('?token=', '');
-        this.props.authUser(token);
-        this.redirectURL();
-      }
-    }
-
     const {
       currentUser: { isAuthenticated },
       success,
