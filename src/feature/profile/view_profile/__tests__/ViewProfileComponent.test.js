@@ -39,7 +39,7 @@ describe('View Profile Component Tests', () => {
     button.simulate('click');
     expect(wrapper.state('show')).toEqual(true);
   });
-  it('should click on the model', () => {
+  it('should update the model', () => {
     wrapper.setProps({ match: { params: { userName: 'carlos' } } });
     expect(wrapper).toHaveLength(1);
   });

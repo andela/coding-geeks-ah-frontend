@@ -107,6 +107,7 @@ export class ViewProfileComponent extends Component {
         <div>
           <UserArticlesComponent
             history={history}
+            params={this.props.match.params}
           />
         </div>
       </div>

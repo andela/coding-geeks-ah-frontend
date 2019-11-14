@@ -22,6 +22,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userArticleLoading: false,
+        articles: [],
         error: action.error,
       };
     default:
