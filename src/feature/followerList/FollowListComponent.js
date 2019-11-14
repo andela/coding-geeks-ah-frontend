@@ -38,14 +38,14 @@ export class FollowListComponent extends React.Component {
       clearFollowers,
       getFollingList,
       getFollowers,
-      params
+      params: { userName }
     } = this.props;
-    if (params !== prevProps.params) {
+    if (userName !== prevProps.params.userName) {
       clearFollowing();
       clearFollowers();
       clearFollowingList();
-      getFollowers(params.userName);
-      getFollingList(params.userName);
+      getFollowers(userName);
+      getFollingList(userName);
     }
   }
 

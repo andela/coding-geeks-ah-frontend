@@ -33,10 +33,14 @@ export class ViewProfileComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { getVisitedProfile, match } = this.props;
-    const { params } = match;
-    if (params !== prevProps.match.params) {
-      getVisitedProfile(params.userName);
+    const {
+      getVisitedProfile,
+      match: {
+        params: { userName }
+      }
+    } = this.props;
+    if (userName !== prevProps.match.params.userName) {
+      getVisitedProfile(userName);
     }
   }
 

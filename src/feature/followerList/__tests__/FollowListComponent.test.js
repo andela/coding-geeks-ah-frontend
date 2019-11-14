@@ -13,7 +13,7 @@ const renderComponent = (args) => {
     isAuthenticated: true,
     modalIsOpen: false,
     openModal: jest.fn(),
-    params: 'carlos',
+    params: { userName: 'someone' },
     lists: [],
     type: '',
     followList: {
@@ -46,7 +46,7 @@ describe('FollowListComponent Component Tests', () => {
     expect(Wrapper).toHaveLength(1);
   });
   it('should update props', () => {
-    Wrapper.setProps({ params: 'yves' });
+    Wrapper.setProps({ params: { userName: 'carlos' } });
     expect(Wrapper).toHaveLength(1);
   });
 

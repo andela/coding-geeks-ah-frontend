@@ -16,6 +16,7 @@ const renderProfile = () => {
     visitedUserProfile: {
       userName: 'someone'
     },
+    params: 'someone',
     match: {
       params: { userName: 'someone' }
     }
@@ -37,5 +38,9 @@ describe('View Profile Component Tests', () => {
   it('should click on the model', () => {
     button.simulate('click');
     expect(wrapper.state('show')).toEqual(true);
+  });
+  it('should click on the model', () => {
+    wrapper.setProps({ match: { params: { userName: 'carlos' } } });
+    expect(wrapper).toHaveLength(1);
   });
 });
