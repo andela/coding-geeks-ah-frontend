@@ -7,8 +7,12 @@ import avatar from '../../app/common/images/avatar.png';
 
 
 export class FollowModal extends Component {
+  clearState = () => {
+    const { close } = this.props;
+    close();
+  }
+
   handleCloseClick = e => {
-    e.preventDefault();
     const { close } = this.props;
     const { parentNode } = e.target;
     if (parentNode.classList.contains('follow-container') || parentNode.classList.contains('close-icon')) {
@@ -23,7 +27,7 @@ export class FollowModal extends Component {
         <div className="list-modal__modal-content">
           <div className="modal-header">
             <div className="close-icon">
-              <i className="fa fa-times close" onClick={this.handleCloseClick} />
+              <i className="fa fa-times close" />
             </div>
             <h2>{type}</h2>
           </div>
@@ -35,6 +39,7 @@ export class FollowModal extends Component {
                     <Link
                       to={`/profile/${user.username}`}
                       className="body-follow-user"
+                      onClick={this.clearState}
                     >
                       <div className="body-image">
                         <img src={user.image || avatar} alt="user pic" />
@@ -50,7 +55,7 @@ export class FollowModal extends Component {
                     </Link>
                     <div className="follow-unfollow-container">
                       <FollowUnfollow
-                        authorId={user.d}
+                        authorId={user.id}
                         username={user.username}
                       />
                     </div>
@@ -65,20 +70,3 @@ export class FollowModal extends Component {
 }
 
 export default FollowModal;
-
-// (
-//   <div className="modal-body">
-//     <div className="body-no-info">
-//       <p>
-//         No
-//                         {' '}
-//         {type}
-//       </p>
-//     </div>
-//   </div>
-// )
-
-// .body-no-info {
-//   color: #5c5a5a;
-//   text-align: center;
-// }

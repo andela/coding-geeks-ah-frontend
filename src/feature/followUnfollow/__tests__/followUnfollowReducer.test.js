@@ -6,7 +6,11 @@ import {
   UNFOLLOW_AUTHOR_SUCCESS,
   UNFOLLOW_AUTHOR_FAIL,
   GET_FOLLOWING_AUTHOR_SUCCESS,
-  CLEAR_FOLLOW
+  CLEAR_FOLLOW,
+  CLEAR_FOLLOWERS,
+  CLEAR_FOLLOWING_LIST,
+  GET_FOLLOWERS_AUTHOR_SUCCESS,
+  GET_FOLLOWINGLIST_SUCCESS
 } from '../followUnfollowTypes';
 
 describe('FOLLOW AUTHOR', () => {
@@ -75,5 +79,46 @@ describe('CLEAR FOLLOWING', () => {
       follow: undefined,
     });
     expect(reducer).toHaveProperty('following');
+  });
+});
+
+describe('CLEAR_FOLLOWERS', () => {
+  test('CLEAR_FOLLOWERS', () => {
+    const reducer = followReducers(initialState, {
+      type: CLEAR_FOLLOWERS,
+      follow: undefined,
+    });
+    expect(reducer).toHaveProperty('followers');
+  });
+});
+
+describe('CLEAR_FOLLOWING_LIST', () => {
+  test('CLEAR_FOLLOWING_LIST', () => {
+    const reducer = followReducers(initialState, {
+      type: CLEAR_FOLLOWING_LIST,
+      follow: undefined,
+    });
+    expect(reducer).toHaveProperty('followingList');
+  });
+});
+
+describe('GET_FOLLOWERS_AUTHOR_SUCCESS', () => {
+  test('GET_FOLLOWERS_AUTHOR_SUCCESS', () => {
+    const reducer = followReducers(initialState, {
+      type: GET_FOLLOWERS_AUTHOR_SUCCESS,
+      follow: undefined,
+      payload: {}
+    });
+    expect(reducer).toHaveProperty('followers');
+  });
+});
+describe('GET_FOLLOWINGLIST_SUCCESS', () => {
+  test('GET_FOLLOWINGLIST_SUCCESS', () => {
+    const reducer = followReducers(initialState, {
+      type: GET_FOLLOWINGLIST_SUCCESS,
+      follow: undefined,
+      payload: {}
+    });
+    expect(reducer).toHaveProperty('followingList');
   });
 });

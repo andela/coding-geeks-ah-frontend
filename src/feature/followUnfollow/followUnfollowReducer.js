@@ -1,17 +1,21 @@
 import {
   CLEAR_FOLLOW,
+  CLEAR_FOLLOWERS,
   FOLLOW_AUTHOR_SUCCESS,
   FOLLOW_AUTHOR_FAIL,
   UNFOLLOW_AUTHOR_SUCCESS,
   UNFOLLOW_AUTHOR_FAIL,
   GET_FOLLOWING_AUTHOR_SUCCESS,
-  GET_FOLLOWERS_AUTHOR_SUCCESS
+  GET_FOLLOWERS_AUTHOR_SUCCESS,
+  GET_FOLLOWINGLIST_SUCCESS,
+  CLEAR_FOLLOWING_LIST,
 } from './followUnfollowTypes';
 
 const initialState = {
   follow: undefined,
   following: [],
-  followers: []
+  followers: [],
+  followingList: [],
 };
 
 const followReducers = (state = initialState, action) => {
@@ -21,6 +25,14 @@ const followReducers = (state = initialState, action) => {
       ...state,
       following: []
     };
+    case CLEAR_FOLLOWERS: return {
+      ...state,
+      followers: []
+    };
+    case CLEAR_FOLLOWING_LIST: return {
+      ...state,
+      followingList: []
+    };
     case GET_FOLLOWING_AUTHOR_SUCCESS: return {
       ...state,
       following: payload.data
@@ -28,6 +40,10 @@ const followReducers = (state = initialState, action) => {
     case GET_FOLLOWERS_AUTHOR_SUCCESS: return {
       ...state,
       followers: payload.data
+    };
+    case GET_FOLLOWINGLIST_SUCCESS: return {
+      ...state,
+      followingList: payload.data
     };
     case FOLLOW_AUTHOR_SUCCESS: return {
       ...state,

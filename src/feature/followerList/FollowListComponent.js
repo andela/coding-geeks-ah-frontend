@@ -2,10 +2,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Modal from './FollowModal';
-import { getFollowing, getFollowers } from '../followUnfollow/followUnfollowAction';
+import {
+  clearFollowing, clearFollowers, getFollingList, getFollowers, clearFollowingList
+} from '../followUnfollow/followUnfollowAction';
 import './Follow.scss';
 
-class FollowListComponent extends React.Component {
+export class FollowListComponent extends React.Component {
   constructor() {
     super();
 
@@ -18,13 +20,33 @@ class FollowListComponent extends React.Component {
 
   componentDidMount() {
     const {
-      getFollowing,
+      isAuthenticated,
+      getFollingList,
       getFollowers,
       params
     } = this.props;
-    const { username } = params;
-    getFollowers(username);
-    getFollowing(username);
+    if (isAuthenticated) {
+      getFollowers(params.userName);
+      getFollingList(params.userName);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      clearFollowingList,
+      clearFollowing,
+      clearFollowers,
+      getFollingList,
+      getFollowers,
+      params
+    } = this.props;
+    if (params !== prevProps.params) {
+      clearFollowing();
+      clearFollowers();
+      clearFollowingList();
+      getFollowers(params.userName);
+      getFollingList(params.userName);
+    }
   }
 
   openModal = (value, type) => {
@@ -39,8 +61,8 @@ class FollowListComponent extends React.Component {
 
   render() {
     const { modalIsOpen, lists, type } = this.state;
-    const { followingList, isAuthenticated } = this.props;
-    const { following, followers } = followingList;
+    const { followList, isAuthenticated } = this.props;
+    const { followingList, followers } = followList;
     return isAuthenticated ? (
       <div className="follow-container">
         <button
@@ -53,10 +75,10 @@ class FollowListComponent extends React.Component {
         </button>
         <button
           type="button"
-          onClick={() => { this.openModal(following, 'Following'); }}
+          onClick={() => { this.openModal(followingList, 'Following'); }}
           className="follow-container__follow-btn"
         >
-          <span className="follow-number">{following.length}</span>
+          <span className="follow-number">{followingList.length}</span>
           following
         </button>
         <Modal
@@ -71,33 +93,16 @@ class FollowListComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  followingList: state.followAuthor,
+  followList: state.followAuthor,
   isAuthenticated: state.login.isAuthenticated
 });
 
 const mapDispatchToProps = {
-  getFollowing,
-  getFollowers
+  getFollingList,
+  getFollowers,
+  clearFollowing,
+  clearFollowers,
+  clearFollowingList
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FollowListComponent);
-
-// import React from 'react';
-// import './Follow.scss';
-
-// export function FollowListComponent() {
-//   return (
-//     <div className="follow-container">
-//       <button type="button" className="follow-container__follow-btn">
-//         <span className="follow-number">123</span>
-//         Follwers
-//       </button>
-//       <button type="button" className="follow-container__follow-btn">
-//         <span className="follow-number">123</span>
-//         Following
-//       </button>
-//     </div>
-//   );
-// }
-
-// export default FollowListComponent;
