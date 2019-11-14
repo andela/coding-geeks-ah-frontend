@@ -13,6 +13,13 @@ export class UserArticles extends Component {
     getArticles(user);
   }
 
+  componentDidUpdate(prevProps) {
+    const { getArticles, params: { userName } } = this.props;
+    if (userName !== prevProps.params.userName) {
+      getArticles(userName);
+    }
+  }
+
   handleArticleClick(slug) {
     const { history } = this.props;
     return history.push(`/articles/${slug}`);

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { retrieveProfile } from './ViewProfileAction';
 import { updateUserProfile } from '../update_profile/UpdateProfileAction';
 import visitedProfile from '../viewVisitedProfile/ViewVisitedProfileAction';
+import FollowList from '../../followerList/FollowListComponent';
 import './ViewProfileStyle.scss';
 import notFound from '../img/no-image.jpeg';
 import { UpdateProfileComponent } from '../update_profile/UpdateProfileComponent';
@@ -27,6 +28,18 @@ export class ViewProfileComponent extends Component {
       }
     } = this.props;
     if (userName) {
+      getVisitedProfile(userName);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      getVisitedProfile,
+      match: {
+        params: { userName }
+      }
+    } = this.props;
+    if (userName !== prevProps.match.params.userName) {
       getVisitedProfile(userName);
     }
   }
@@ -66,6 +79,9 @@ export class ViewProfileComponent extends Component {
           <div className="grid-container__profile-info">
             <p className="grid-container__username">{`${user}`}</p>
             <p className="grid-container__bio">{`${bio}`}</p>
+            <FollowList
+              params={this.props.match.params}
+            />
           </div>
           {user === authenticated.username ? (
             <button
@@ -91,6 +107,7 @@ export class ViewProfileComponent extends Component {
         <div>
           <UserArticlesComponent
             history={history}
+            params={this.props.match.params}
           />
         </div>
       </div>
@@ -113,8 +130,7 @@ export const mapDispatchToProps = dispatch => ({
   getVisitedProfile: user => {
     dispatch(visitedProfile(user));
   },
-  updateProfile:
-  (user, profile, closeModal) => dispatch(updateUserProfile(user, profile, closeModal))
+  updateProfile: (user, profile, closeModal) => dispatch(updateUserProfile(user, profile, closeModal))
 });
 
 export default connect(
