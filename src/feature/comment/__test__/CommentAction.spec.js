@@ -52,16 +52,13 @@ describe('Action types', () => {
 
     const expectedAction = actionTypes.COMMENT_FETCH_SUCCESS;
     const expectedActionLoading = actionTypes.COMMENT_LOADING;
-    const expectedActionHasmore = actionTypes.COMMENT_HASMORE;
 
     return store.dispatch(fetchComments(slug, 1, 2)).then(() => {
       const dispatchedActions = store.getActions();
 
       const dispatchedTypes = dispatchedActions.map(action => action.type);
       expect(dispatchedTypes[0]).toEqual(expectedActionLoading);
-      expect(dispatchedActions[1].type).toEqual(expectedActionHasmore);
-      expect(dispatchedActions[2].type).toEqual(expectedAction);
-
+      expect(dispatchedActions[1].type).toEqual(expectedAction);
     });
   });
   it('Should dispatch COMMENT_LOADING and COMMENT_HASMORE action types', async () => {

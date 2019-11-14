@@ -29,7 +29,6 @@ describe('Testing search component', () => {
       <Search />
     </Provider>
   );
-  console.log(Wrapper.instance());
   it('should render the component', () => {
     expect(Wrapper.exists()).toBe(true);
   });
