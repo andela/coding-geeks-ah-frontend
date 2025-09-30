@@ -27,7 +27,7 @@
     "jest-localstorage-mock": "^2.4.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "npm": "^6.13.0",
